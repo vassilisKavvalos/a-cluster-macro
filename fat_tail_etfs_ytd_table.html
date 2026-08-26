@@ -1,0 +1,1646 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ETF Portfolio - 2026 Performance</title>
+        <style>
+            body {
+                background-color: #08111f;
+                font-family: 'DejaVu Sans', Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+
+            .container {
+                max-width: 1200px;
+                width: 100%;
+                background-color: #08111f;
+                padding: 20px;
+            }
+
+            .header {
+                padding: 20px 0 10px 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .header-text {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .title {
+                color: #f8fafc;
+                font-size: 29px;
+                font-weight: bold;
+                margin: 0 0 10px 0;
+            }
+
+            .subtitle {
+                color: #9eacc0;
+                font-size: 16px;
+                margin: 0 0 6px 0;
+            }
+
+            .meta {
+                color: #5f7290;
+                font-size: 12px;
+                margin: 0 0 15px 0;
+            }
+
+            .divider {
+                border: none;
+                border-top: 1.3px solid #2b4565;
+                margin: 10px 0 20px 0;
+            }
+
+            .table-wrapper {
+                overflow-x: auto;
+                border-radius: 8px;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 15px;
+                background-color: #08111f;
+            }
+
+            thead th {
+                background-color: #1c3a63;
+                border: 1px solid #36587e;
+                border-bottom: 2px solid #36587e;
+                color: #ffffff;
+                font-weight: bold;
+                padding: 12px 8px;
+                text-align: center;
+                font-size: 14.5px;
+            }
+
+            thead th:first-child {
+                border-radius: 8px 0 0 0;
+            }
+
+            thead th:last-child {
+                border-radius: 0 8px 0 0;
+            }
+
+            tbody tr:hover {
+                background-color: #1c3a63 !important;
+                transition: background-color 0.2s ease;
+            }
+
+            .footer {
+                margin-top: 30px;
+                padding: 15px 0 0 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .footer-left {
+                color: #718198;
+                font-size: 11.5px;
+                font-weight: bold;
+            }
+
+            .footer-right {
+                color: #718198;
+                font-size: 10.5px;
+                text-align: right;
+            }
+
+            @media (max-width: 768px) {
+                .title {
+                    font-size: 22px;
+                }
+                .subtitle {
+                    font-size: 14px;
+                }
+                table {
+                    font-size: 13px;
+                }
+                thead th {
+                    font-size: 12px;
+                    padding: 8px 4px;
+                }
+                tbody td {
+                    font-size: 12px !important;
+                    padding: 6px 4px !important;
+                }
+                .footer {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+                .footer-right {
+                    text-align: left;
+                }
+                .header {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <div class="header-text">
+                    <h1 class="title">ETF's — 2026 Performance Snapshot</h1>
+                    <p class="subtitle">Current prices, year-to-date returns and distance from annual highs</p>
+                    <p class="meta">132 holdings tracked  ·  updated 26 August 2026</p>
+                </div>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAJq0lEQVR4nO2Ze3BU1R3HP+fe3Tw2790kC4aQ8EjkYXjZFHQExVqVWrV1sLYzWAsUxRYFGXBEVMbKVIuKpS2IL3xQFahWSx2rHaAFRQELCIVAYkJISMg75LF793H3ntM/8hAQBdOsV8d8Z3Zm79y7Z7/ne37vK6SUim8xNLsJ2I0+AewmYDf6BLCbgN3oE8BuAnajTwC7CdiNPgHsJmA3+gSwm4Dd+NoLIJUimg2rI2ornyOUUp2fjmshQNM+PRf9pO9K9b4QtgkgpUQpcDj0M97v2mzxkSqMQIiC83PR9d43WFsEkFKi6x0br61voqj4CCda23A6HHgzPQwdlE1aSjJHq+r467sfIpXCZwSZWDgSS0o0IXqNy1cmgKVA0HGyDl1n194iXnntbVAwdtQw8ocOJDHBhVLQ2HgCT1oKH+07TJsvQGyMk1DYjAov8VWMxBR0npoCBKueXcdf3t3OojnTuPLS8Z953h8IseGtLShpUTimgJqGZiYVjiQ2xtnr3KIuQNfmNzYF+UN5C2bI5AaHwR2F+WiawLIklpTEOB2s3riVp9f/g4pj1bQ2NjHj2sk8tHAm3nR3VAIgRFkAS4FDE2xtC3PZjlowAuAPkhqjc+zHI0h0CExL4tR15q95iydWrYdICISEcBBqazkv28t7f3ua3Oz+KAWa1nv+D1GuA7qUfe5YO7oRJEFZxKJoqWnhpeI66gwTp67zUVk1T6zfhCM1kZRMNzWbn+PhebeAy8Xxo9UsfngVmqZ9E9Ngh89PTItnbYuB34rACYMrh7oxpWTh5gMYx+vZf6gUR4KLSFUzS++5hZc3bqGwIJ/Ro4ex/4PdbNuxF5/PIDHRhZQS0YtZIKoW4NA02owgzgP7WVLgYYonnoXfHcCGKcOYW5DFCz8Yw+NTL2bs4P7I1nYKJ4xizg3fIyE+jiyvhz8tuQOEIGxGCJvRyQJRE0BKhQCO1DQx/cHnmSR8vP2jkSybNJiUWAemJbGUIseTzA8vzEf6A0y7opB7Vq7jz29uYfrdjxIIhRk1djietGTSUpN7/fQhii6gOiNA1Yl2tPhEyv0mCvCFTOKcOkIIJIBS3HzRCH4/fgRzlz4LKgKGH0IBrrxpLvh9bFj7GEIILMvqLqB6C1GzgK6TGpCZhvR6WfNxJRFLkhTrxKlpODRBjK5hWJJHD9Qx4+bruezCYRAKQ9gE0yI1ycWKJxZz47VXRGXzEOU0KFVHc3PNi//inX3VTCgcyu3fGcyg5DhahM5Wn+TF4joaj9bzwEUDeXBsNpt27qekrJLUhHgunTCaLG86liV7Pf11oUcCKKXO6otKqe4iqCloMmtTEW9WtUFsPKSnQkoiSIspMRaLhqQyMSMRS4hTuj+ASMSKShPUhR4JIIT43IDUsZxC13UsywLo3IDg45YAu9tC+J1OMoWkQJfkJzjRNA1T03HqGhHL6l5X17Tu/K86rakLp1+DQCkJCBCgpERo2lkbp3MWoKMGUWiaht8IkOCK7y5MTi5Qunr5YDBIXFzcmVYC0wRNI2JamEIjLtZJdAz87DOEc84CUkocDp3pd9zPK8+vY/Om9VwyYdxnglN5RTW/uH0RDQ2NeJKTWL5sMZve24UmYMGdM1EKfEGTG2fMZ+Xv7iV/cA7bd+5l1Zr1PHTvHB5Z/gyt7T4sw2BM4WjGjBrJisefQrnikCGT3EEDuOaqyaxcvRZvlpeIESQruz8zpk1lwf3LcDgdWJEI7uQkHlx8J3lDcpBSfW4MOSfnsiwLh0Pnzbe3sO2D/3DX/FuZveA3SCmJRCwOHiqluPQo7T4/V914K+NGDeP1V1Yyc/pPCEci7D9YwsHDZWiAhsIyI2z/cDctLW1IpaiuqWdfUQlvvLWZZ558iaysfowbV8B1V0/mkvFjWLF8Cf8tKuXSiYXct2A2x6pr2b3vIMPzBzMkdwCXTxpPu8/Pth17mTf7Zh66by579hexdPlT3emzxxagVIc/h80Is+YtITPDQ2pGBge372Dlc68ye/pNrF6zAU9GGr+cdgOl5ce4aeo1DM8bxJDcbAwjgBCQlJSIEAIhBLGxTqSCQDCEJgTBUJjmE63MmfUzkpOTKC4tZ09RKc+s28j+ba8zYkQeaanJ5A0dxODcbOLiYkiIj0cIDZTC7U4lKSkBIRUrnnqZI0cqSUlOYe6t05Cd/HssgJQKXRf8+u6luGJi+PlPr8fn87Ng8XzufuAxrpp8MX989N7u51ctu49rp97GiAvyKS8uZdE9czivv5dXX3qN8ooqjPp67lr4K+beNo3pMxeSk5dD2eEy5s2Zzge79vHu3/9JnCeVlsYm3KkpqM6hqEPXcDh0lFJoQiMcDHKopIyw32D9G+9w3dWX48lws/bJ37L6hQ2sefkN+vfLBKX4ojh41iCoAMuSbNr6IWNHDadfhqf73vs795DhcTMkNxurM0bomkZxWQWHikoYOjSXC4bnUd/YTH19I6YlURGTAdlZZKa7OVRyhKamZvr39zIkN5vKqhpqjtciHA50ISi44HxinE6klFQcO47HnUpigguf36CqqgZ/IISSFq4EF7kDs2hoPMGgnCwAtu/cS7onjbwhOSgpTxm0fikBTk91phnBIcCQioT/a0LT0Sl2IVqV3in/eIaMcFYBjrcHMaXsyAK6zsAUF++1GhxRkGdJtJCFO0anqKqBkTmZ/LuymbGZSZTUtTEiM4na1gAOTSBNE3diPKW+EIPTEolIi3ZLEhfrpNgXZFZeP3Z+tA+/3+hI8ErhzUwnEAzidDo4eLiMMQXDOFBUwkWFY3h/xx68GR4yMtzU1jWSke7mQNEnFIzMp6Kyminfn0Rbu5+2Nh8I6OdNJz4u9jP7+8IsoICKVoPSEz7K2wJUthkopTD9Icp2lVLT0E5JZQN1rQal1S20+IK0BEMIAQXeZCzTItPlpF+8g08qG2hoNRjpTcGpCeJ0nabWAIm6TnvQ7BiYSsmArH4IITAjEaprGzhWXYcV6YjiUkra2g1crngam5oJhsLomo7fCGBZEl3XCIdN2n1+hIDmljY+KaugtKwSvxE4oxV8aRdQqqPNrWnx43bFEuvUodu/TjXrc0Zn2dzTVvdMpbk8g9/3yAXkaT/ShDhpyvvpolIpNCGQnWS66HRJIpVCILojsjrpZvezn1O1dZXeJ29Iyo7oLk7jcfJvut46dV2fSeAed4PqNPLfVPR4INLLgxnb8LV/Oxxt9AlgNwG70SeA3QTsRp8AdhOwG30C2E3AbvQJYDcBu9EngN0E7EafAHYTsBt9AthNwG70CWA3AbvxrRfgf5QMaRoLEsi4AAAAAElFTkSuQmCC" alt="logo" style="height: 40px; width: auto; display: block;">
+            </div>
+            <hr class="divider">
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">#</th>
+                            <th style="width: 8%;">Ticker</th>
+                            <th style="width: 32%; text-align: left;">ETF / Benchmark</th>
+                            <th style="width: 6%;">Ccy</th>
+                            <th style="width: 13%;">Current Price</th>
+                            <th style="width: 12%;">YTD High</th>
+                            <th style="width: 12%;">YTD Return</th>
+                            <th style="width: 12%;">Below YTD High</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">1</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EUNL.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Core MSCI World UCITS ETF USD (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€126.61</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€129.85</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +13.27%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.49%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">2</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">VWCE.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Vanguard FTSE All-World UCITS ETF USD Accumulation</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€166.52</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€170.12</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +14.51%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.12%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">3</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">SPPW.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">State Street SPDR MSCI World UCITS ETF USD Unhedged</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€46.27</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€47.45</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +13.22%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.50%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">4</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">ELFW.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Deka MSCI World UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€43.57</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€44.65</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +12.43%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.42%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">5</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">SPYI.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">State Street SPDR MSCI All Country World Investable Market UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€11.49</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€11.74</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +15.13%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.13%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">6</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">LYYA.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Amundi MSCI World Swap II UCITS ETF Dist</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€426.20</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€436.91</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +13.17%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.45%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">7</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">SPPE.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">State Street SPDR S&P 500 UCITS ETF EUR Hedged</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€18.60</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€18.94</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +10.32%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-1.84%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">8</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">VNRA.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Vanguard FTSE North America UCITS ETF USD Accumulation</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€166.06</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€170.66</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +12.64%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.70%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">9</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EXI2.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Dow Jones Global Titans 50 UCITS ETF (DE)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€112.30</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€114.86</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +12.28%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.23%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">10</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EXSA.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Core STOXX Europe 600 UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€65.71</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€66.23</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +12.13%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.79%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">11</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">VEUR.AS</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Vanguard FTSE Developed Europe UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€50.91</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€51.44</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +11.06%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-1.03%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">12</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IBCH.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares MSCI World EUR Hedged UCITS ETF (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€120.07</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€122.07</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +11.13%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-1.63%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">13</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IUSN.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares MSCI World Small Cap UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€9.17</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€9.36</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +17.88%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.04%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">14</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">ZPRR.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">SPDR Russell 2000 US Small Cap UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€75.30</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€78.10</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +20.79%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-3.59%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">15</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">GERD.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">L&G Gerd Kommer Multifactor Equity UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€15.05</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€15.27</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +16.12%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-1.43%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">16</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">XQUI.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Xtrackers Portfolio UCITS ETF 1C</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€358.00</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€363.45</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +9.92%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-1.50%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">17</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">XZEW.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Xtrackers S&P 500 Equal Weight Scored & Screened UCITS ETF 1C</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€53.20</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€53.80</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +17.19%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-1.12%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">18</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">XDEW.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Xtrackers S&P 500 Equal Weight UCITS ETF 1C</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€105.62</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€107.50</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +16.01%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-1.75%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">19</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">SXR8.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Core S&P 500 UCITS ETF USD (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€708.62</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€729.84</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +12.62%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.91%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">20</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">LYP6.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Amundi Core Stoxx Europe 600 UCITS ETF Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€323.80</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€326.70</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +13.42%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.89%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">21</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EUNM.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares MSCI EM UCITS ETF USD (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€55.58</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€60.10</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +24.68%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-7.51%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">22</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">VFEM.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Vanguard FTSE Emerging Markets UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€71.95</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€73.96</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +12.74%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.72%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">23</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">AMEM.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Amundi MSCI Emerging Markets Swap UCITS ETF EUR Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€7.67</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€8.27</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +24.91%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-7.27%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">24</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IS3N.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Core MSCI Emerging Markets IMI UCITS ETF (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€47.42</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€51.01</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +23.66%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-7.02%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">25</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">84X0.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares MSCI EM ex-China UCITS ETF USD (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€8.07</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€8.92</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +37.22%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-9.57%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">26</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">FYER.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Fidelity Emerging Markets Equity Research Enhanced UCITS ETF USD Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€6.52</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€6.95</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +24.51%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-6.13%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">27</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">QDV5.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares MSCI MSCI India UCITS ETF (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€7.65</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€8.46</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -7.51%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-9.59%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">28</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">AMEL.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Amundi MSCI Em Latin America UCITS ETF-C EUR</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€21.07</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€22.62</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +16.18%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-6.87%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">29</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">CEBL.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares VII PLC - iShares MSCI EM Asia ETF USD Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€258.60</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€285.20</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +27.42%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-9.33%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">30</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">SXR1.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares VII PLC - iShares Core MSCI Pac ex-Jpn ETF USD Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€219.30</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€220.75</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +16.64%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.66%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">31</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">LGQM.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Amundi Pan Africa UCITS ETF Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€16.36</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€16.85</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +12.40%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.95%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">32</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IBC4.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares MSCI South Africa UCITS ETF USD (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€55.50</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€61.05</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +6.92%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-9.09%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">33</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">LYMH.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Amundi MSCI Greece UCITS ETF Dist</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€2.96</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€2.98</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +29.21%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.52%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">34</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">GD.AT</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Athens General Index</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€2,651.88</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€2,661.83</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +25.05%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.37%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">35</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IS3Q.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Edge MSCI World Quality Factor UCITS ETF USD (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€77.67</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€79.09</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +13.69%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-1.80%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">36</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IS3R.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Edge MSCI World Momentum Factor UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€99.01</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€109.60</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +18.62%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-9.66%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">37</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IS3S.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Edge MSCI World Value Factor UCITS ETF USD (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€69.77</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€71.47</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +35.79%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.38%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">38</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">CEMS.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Edge MSCI Europe Value Factor UCITS ETF EUR (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€14.03</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€14.22</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +17.92%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-1.38%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">39</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">QDVI.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Edge MSCI USA Value Factor UCITS ETF USD</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€16.43</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€17.39</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +47.35%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-5.51%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">40</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">ZPRV.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">SPDR MSCI USA Small Cap Value Weighted UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€81.48</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€83.95</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +21.36%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.94%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">41</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">XDEB.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Xtrackers MSCI World Minimum Volatility UCITS ETF 1C</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€45.19</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€45.52</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +7.61%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.72%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">42</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IQQ0.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Edge MSCI World Minimum Volatility UCITS ETF USD (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€67.32</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€67.91</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +7.37%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.87%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">43</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">VGWE.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Vanguard FTSE All-World High Dividend Yield UCITS ETF USD Accumulation</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€93.85</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€94.46</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +18.77%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.65%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">44</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">QDVW.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares MSCI World Quality Dividend Advanced UCITS ETF USD (Dist)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€8.47</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€8.65</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +18.93%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.07%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">45</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">VDIV.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">VanEck Morningstar Developed Markets Dividend Leaders UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€55.70</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€55.84</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +15.98%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.25%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">46</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">ISPA.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares STOXX Global Select Dividend 100 UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€40.23</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€40.40</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +18.53%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.41%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">47</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EXXT.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Nasdaq 100 UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€242.75</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€260.55</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +15.02%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-6.83%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">48</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EQQQ.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Invesco EQQQ Nasdaq-100 UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€610.40</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€654.80</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +15.04%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-6.78%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">49</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">XDWT.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Xtrackers MSCI World Information Technology UCITS ETF 1C</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€121.02</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€130.70</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +20.13%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-7.41%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">50</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">LSMC.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">MUL-Am.MSCI Semiconductor UE N</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€106.66</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€127.58</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +50.35%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-16.40%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">51</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">VVSM.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">VanEck Semiconductor UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€89.13</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€110.82</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +67.51%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-19.57%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 2px solid #ffd76a; border-bottom: 2px solid #ffd76a;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">52</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">SEC0.DE</td>
+            <td style="color: #ffd76a; font-weight: bold; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares MSCI Global Semiconductors UCITS ETF USD Acc  ★</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€16.68</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€21.52</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +74.55%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-22.52%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">53</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">XAIX.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Xtrackers Artificial Intelligence & Big Data UCITS ETF 1C</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€199.98</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€221.55</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +28.55%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-9.74%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">54</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">XMLD.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">L&G Artificial Intelligence UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€34.22</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€36.23</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +41.17%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-5.55%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">55</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">GOAI.PA</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Amundi MSCI Robotics & AI UCITS ETF Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€137.42</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€149.00</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +21.92%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-7.77%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">56</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">XB0T.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Global X Robotics & Artificial Intelligence ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€20.53</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€23.23</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -0.85%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-11.62%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">57</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">2B76.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Automation & Robotics UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€18.33</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€19.34</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +31.63%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-5.23%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">58</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">AIFS.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares AI Infrastructure UCITS ETF USD (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€9.34</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€10.39</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +49.19%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-10.18%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">59</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">L0CK.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Digital Security UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€10.47</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€11.44</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +20.68%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-8.46%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">60</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">ARXK.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">ARK Innovation UCITS ETF USD Accumulating</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€8.24</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€8.25</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +17.70%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.07%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">61</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">QUTM.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">VanEck Quantum Computing UCITS ETF A USD Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€25.06</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€29.89</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +16.56%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-16.16%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">62</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">WQTM.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">WisdomTree Quantum Computing UCITS ETF - USD Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€32.36</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€40.76</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +25.43%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-20.60%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">63</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">JEDI.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">VanEck Space Innovators UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€70.71</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€121.24</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +22.89%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-41.68%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">64</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">ESP0.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">VanEck Video Gaming and eSports UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€55.52</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€60.55</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -5.42%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-8.31%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">65</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">ETLH.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">L&G Ecommerce Logistics UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€17.24</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€17.44</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +6.49%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-1.17%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">66</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">XDWH.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Xtrackers MSCI World Health Care UCITS ETF 1C</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€55.41</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€55.57</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +10.62%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.29%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">67</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">QDVG.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares S&P 500 Health Care Sector UCITS ETF USD</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€12.12</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€12.19</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +14.25%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.56%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">68</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">2B70.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Nasdaq US Biotechnology UCITS ETF USD (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€9.22</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€9.25</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +28.94%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.32%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">69</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">U5MD.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares US Medical Devices UCITS ETF USD (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€5.07</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€5.99</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -12.00%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-15.47%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">70</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">2B78.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Healthcare Innovation UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€9.37</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€9.38</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +21.49%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.10%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">71</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">DFEN.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">VanEck Defense UCITS ETF (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€53.71</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€64.51</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +2.81%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-16.74%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">72</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">5J50.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Global Aerospace & Defence UCITS ETF USD (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€8.57</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€9.23</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +9.89%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-7.17%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">73</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EUDF.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">WisdomTree Europe Defence UCITS ETF EUR Unhedged Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€32.89</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€36.03</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +10.89%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-8.71%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">74</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">SPYQ.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">SPDR MSCI Europe Industrials UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€457.80</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€469.60</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +13.94%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.51%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">75</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">ESIN.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares MSCI Europe Industrials Sector UCITS ETF EUR (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€9.94</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€10.18</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +13.86%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.37%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">76</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EXX1.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares EURO STOXX Banks 30-15 UCITS ETF (DE)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€30.93</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€31.64</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +19.58%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.23%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">77</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EXH5.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares STOXX Europe 600 Insurance UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€54.97</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€55.48</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +8.06%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.92%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">78</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">XDWS.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Xtrackers MSCI World Consumer Staples UCITS ETF 1C</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€48.06</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€50.56</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +9.44%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-4.95%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">79</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">XDWC.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Xtrackers MSCI World Consumer Discretionary UCITS ETF 1C</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€59.32</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€61.96</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -0.80%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-4.26%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">80</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">QDVK.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares S&P 500 Consumer Discretionary Sector UCITS ETF USD (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€14.49</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€15.05</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +0.54%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-3.71%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">81</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">XDWU.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Xtrackers MSCI World Utilities UCITS ETF 1C</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€40.72</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€43.92</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +6.37%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-7.31%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">82</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EXH1.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares STOXX Europe 600 Oil & Gas UCITS ETF (DE)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€53.72</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€55.99</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +31.46%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-4.05%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">83</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">5MVW.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares MSCI World Energy Sector UCITS ETF USD Inc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€8.42</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€8.95</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +35.46%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-5.91%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">84</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">XDW0.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Xtrackers MSCI World Energy Sector UCITS ETF 1C</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€63.95</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€66.92</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +37.28%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-4.44%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">85</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">QDVF.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares S&P 500 Energy Sector UCITS ETF (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€11.17</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€11.73</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +40.16%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-4.72%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">86</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">ZPDE.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">State Street SPDR S&P U.S. Energy Select Sector UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€42.62</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€44.61</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +39.96%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-4.45%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">87</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">SC0V.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Invesco STOXX Europe 600 Optimised Oil & Gas UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€426.70</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€447.40</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +34.61%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-4.63%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">88</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IQQH.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Global Clean Energy Transition UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€8.73</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€11.71</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +7.52%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-25.50%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">89</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">BATE.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">L&G Battery Value-Chain UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€27.62</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€35.52</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +9.04%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-22.24%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">90</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IEVD.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Electric Vehicles and Driving Technology UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€10.67</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€13.08</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +32.37%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-18.41%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">91</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IQQQ.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Global Water UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€66.18</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€69.32</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +3.44%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-4.53%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">92</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">NUKL.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">VanEck Uranium and Nuclear Technologies UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€49.31</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€61.33</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +5.69%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-19.60%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">93</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">GRID.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">First Trust Nasdaq Clean Edge Smart Grid Infrastructure UCITS ETF Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€53.51</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€59.83</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +17.75%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-10.56%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">94</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">SXRS.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Diversified Commodity Swap UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€8.75</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€9.07</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +26.10%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-3.57%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">95</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EXXY.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Diversified Commodity Swap UCITS ETF (DE)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€34.49</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€35.74</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +25.67%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-3.51%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">96</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">UIQK.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">UBS CMCI Composite SF UCITS ETF USD acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€126.18</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€127.94</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +27.98%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-1.38%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">97</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">ETL2.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">L&G Longer Dated All Commodities UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€27.60</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€28.19</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +20.34%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.11%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">98</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">LYTR.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Amundi Bloomberg Equal-weight Commodity ex-Agriculture UCITS ETF Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€36.21</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€38.47</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +28.95%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-5.86%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">99</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">AIGAP.PA</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">WisdomTree Agriculture</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€5.97</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€5.97</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +16.72%</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">+0.00%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">100</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">PHPM.MI</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">WisdomTree Physical Precious Metals</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€246.10</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€337.51</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -2.95%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-27.08%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">101</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">8PSG.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Invesco Physical Markets PLC O</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€381.42</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€446.46</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +5.81%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-14.57%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">102</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">WMIN.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">VanEck S&P Global Mining UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€62.69</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€65.25</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +27.51%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-3.92%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">103</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">VVMX.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">VanEck Rare Earth and Strategic Metals UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€13.26</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€18.54</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +5.56%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-28.51%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">104</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">CEBT.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Essential Metals Producers UCITS ETF USD Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€9.71</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€10.21</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +23.44%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-4.93%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">105</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EXV6.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares STOXX Europe 600 Basic Resources UCITS ETF (DE)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€89.25</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€91.79</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +31.97%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.77%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">106</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">ASWD.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Sprott Pure Play Copper Miners UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€22.37</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€22.50</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +30.45%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-0.58%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">107</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EXH3.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares STOXX Europe 600 Food & Beverage UCITS ETF (DE)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€65.00</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€68.67</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +5.09%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-5.34%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">108</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IQQ6.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Developed Markets Property Yield UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€22.44</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€23.82</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +9.30%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-5.79%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">109</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IQQP.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares European Property Yield UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€29.80</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€34.54</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -2.05%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-13.72%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">110</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IQQI.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Global Infrastructure UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€33.33</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€35.64</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +9.95%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-6.48%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">111</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">ZPRI.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">SPDR Morningstar Multi-Asset Global Infrastructure UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€33.01</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€34.62</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +4.46%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-4.66%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">112</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">VAGF.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Vanguard Global Aggregate Bond UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€23.59</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€24.19</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -1.07%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.50%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">113</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">AGGH</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Core Global Aggregate Bond UCITS ETF EUR Hedged (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">USD</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">$19.98</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">$21.00</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -3.48%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-4.86%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">114</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EUN3.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Global Government Bond UCITS ETF USD (Dist)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€74.93</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€78.29</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -3.61%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-4.29%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">115</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EUNH.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Core € Govt Bond UCITS ETF EUR (Dist)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€107.26</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€111.52</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -3.11%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-3.82%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">116</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">LYXF.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Amundi Euro Government Bond 15+Y UCITS ETF Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€171.09</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€182.10</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -2.04%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-6.04%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">117</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IBCA.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares Euro Government Bond 1-3yr UCITS ETF (Dist)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€141.32</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€142.90</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -0.50%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-1.11%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">118</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">VGTY.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Vanguard USD Treasury Bond UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€18.08</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€18.90</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -2.21%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-4.36%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">119</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">SXRM.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares USD Treasury Bond 7-10yr UCITS ETF (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">USD</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">$153.77</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">$157.96</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -0.76%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.65%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">120</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">SXRC.MU</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares $ Treasury Bond 20+yr UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€3.86</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€4.15</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -1.93%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-6.98%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">121</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EUNW.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares € High Yield Corp Bond UCITS ETF EUR (Dist)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€91.33</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€93.91</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -2.20%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.75%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">122</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">ECR3.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Amundi Index Solutions - Amundi EUR Corporate Bond 0-3Y</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€54.55</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€54.55</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +1.09%</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">+0.00%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">123</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IUS7.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares J.P. Morgan USD Emerging Markets Bond UCITS ETF (Dist)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€78.49</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€82.13</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -1.36%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-4.43%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">124</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">JGPI.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">JPM Global Equity Premium Income Active UCITS ETF</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€22.97</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€24.19</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +0.04%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-5.06%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">125</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">EDMW.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares MSCI World CTB Enhanced ESG UCITS ETF USD (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€10.66</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€10.91</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +12.44%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-2.26%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">126</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">IQSA.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Invesco Global Active ESG Equity UCITS ETF USD Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€96.60</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€99.60</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +18.60%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-3.01%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">127</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">F701.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Amundi Multi-Asset Portfolio UCITS ETF Dist</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€190.94</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€197.00</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +11.34%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-3.08%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">128</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">DAVV.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">VanEck Crypto & Blockchain Innovators ETF A USD Acc</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€12.09</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€14.25</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +18.16%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-15.17%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">129</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">3BAL.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">WisdomTree EURO STOXX Banks 3x Daily Leveraged</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">N/A</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">N/A</td>
+            <td style="color: #cbd5e1; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">N/A</td>
+            <td style="color: #cbd5e1; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">N/A</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">130</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">SXRV.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">iShares NASDAQ 100 UCITS ETF USD (Acc)</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€1,435.80</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€1,539.20</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +15.34%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-6.72%</td>
+        </tr>
+        
+        <tr style="background-color: #152640; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">131</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">DXSN.DE</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">Xtrackers ShortDAX Daily Swap UCITS ETF 1C</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">EUR</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€8.87</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">€10.57</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▼ -5.70%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-16.04%</td>
+        </tr>
+        
+        <tr style="background-color: #0e1b2e; border-top: 1px solid #2b4565; border-bottom: 1px solid #2b4565;">
+            <td style="color: #9eacc0; padding: 10px 8px; text-align: center; border-left: 1px solid #2b4565; border-right: 1px solid #2b4565; font-size: 13.5px;">132</td>
+            <td style="color: #61a8ff; font-weight: bold; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 15.5px;">GJS</td>
+            <td style="color: #d1dbe8; font-weight: normal; text-align: left; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 14.2px;">STRATS Trust for Goldman Sachs Group Securities, Series 2006-2</td>
+            <td style="color: #8aa8d8; padding: 10px 8px; text-align: center; border-right: 1px solid #2b4565; font-size: 12.5px;">USD</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">$23.47</td>
+            <td style="color: #f3f7fc; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15px;">$24.68</td>
+            <td style="color: #36e5a2; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">▲ +0.86%</td>
+            <td style="color: #ff6b6b; font-weight: bold; text-align: center; padding: 10px 8px; border-right: 1px solid #2b4565; font-size: 15.5px;">-4.90%</td>
+        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="footer">
+                <div class="footer-left">Source: Yahoo Finance</div>
+                <div class="footer-right">Data through 26 August 2026  ·  YTD return measured from the final close of the previous year  ·  Returns exclude cash distributions</div>
+            </div>
+        </div>
+    </body>
+    </html>
+    
