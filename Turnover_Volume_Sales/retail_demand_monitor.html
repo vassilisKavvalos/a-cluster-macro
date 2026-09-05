@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>European Retail Demand Monitor | A-CLUSTER</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+:root {
+  --bg:#07111f; --panel:#0d1b2b; --panel2:#112337; --text:#edf4fb;
+  --muted:#91a5bb; --line:#21364c; --accent:#66c7ff; --accent2:#9cd67b;
+  --danger:#ff8b8b; --amber:#f4c66a;
+}
+* {box-sizing:border-box}
+body {
+  margin:0; font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:linear-gradient(180deg,#06101d 0%,#091522 50%,#06101d 100%);
+  color:var(--text);
+}
+.wrap {max-width:1460px; margin:auto; padding:32px 28px 60px}
+.topbar {display:flex; justify-content:space-between; align-items:center; gap:20px; border-bottom:1px solid var(--line); padding-bottom:18px}
+.brand {font-size:18px; letter-spacing:.18em; font-weight:800}
+.badge {font-size:12px; color:var(--accent); border:1px solid #2a5d79; padding:7px 10px; border-radius:999px}
+.hero {padding:38px 0 24px}
+.kicker {text-transform:uppercase; letter-spacing:.16em; color:var(--accent); font-size:12px; font-weight:800}
+h1 {font-size:clamp(34px,5vw,64px); line-height:.98; margin:10px 0 14px; letter-spacing:-.045em}
+.subtitle {font-size:17px; color:var(--muted); max-width:950px; line-height:1.65}
+.headline {margin-top:20px; max-width:1100px; font-size:18px; line-height:1.65; color:#dce8f5}
+.grid {display:grid; gap:16px}
+.kpis {grid-template-columns:repeat(4,1fr); margin:18px 0 28px}
+.card {background:linear-gradient(180deg,rgba(17,35,55,.96),rgba(10,26,42,.96)); border:1px solid var(--line); border-radius:16px; padding:18px}
+.kpi-label {font-size:12px; text-transform:uppercase; letter-spacing:.11em; color:var(--muted)}
+.kpi-value {font-size:32px; font-weight:800; margin-top:8px}
+.kpi-sub {margin-top:8px; font-size:12px; color:var(--muted)}
+.section {margin-top:34px}
+.section-title {font-size:26px; margin:0 0 8px}
+.section-note {color:var(--muted); margin:0 0 18px; line-height:1.55}
+.two {grid-template-columns:1fr 1fr}
+.chart {height:430px}
+.chart.tall {height:610px}
+.summary-table {width:100%; border-collapse:collapse; margin-top:6px}
+.summary-table th,.summary-table td {padding:12px 10px; border-bottom:1px solid var(--line); text-align:right}
+.summary-table th:first-child,.summary-table td:first-child {text-align:left}
+.summary-table th {color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.07em}
+.metric-chip {display:inline-block; padding:5px 8px; border-radius:7px; font-variant-numeric:tabular-nums}
+.table-wrap {overflow:auto; border:1px solid var(--line); border-radius:14px}
+.rank-table {width:100%; border-collapse:collapse; min-width:1060px; background:#0a1828}
+.rank-table th {position:sticky; top:0; background:#112337; z-index:2; color:#9eb1c5; font-size:11px; text-transform:uppercase; letter-spacing:.07em}
+.rank-table th,.rank-table td {padding:11px 12px; border-bottom:1px solid #183047; text-align:right; font-variant-numeric:tabular-nums}
+.rank-table .country {text-align:left; font-weight:700}
+.rank-table .rank {text-align:center; color:#8097ad; width:50px}
+.pos1 {background:rgba(73,170,115,.08)} .pos2 {background:rgba(73,170,115,.15)} .pos3 {background:rgba(73,170,115,.24)}
+.neg1 {background:rgba(216,86,86,.08)} .neg2 {background:rgba(216,86,86,.15)} .neg3 {background:rgba(216,86,86,.24)}
+.footer {margin-top:36px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; line-height:1.7}
+.tabs {display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px}
+.tab {background:#102238; color:#aec0d2; border:1px solid #294057; padding:8px 12px; border-radius:9px; cursor:pointer}
+.tab.active {background:#173652; color:white; border-color:#3c6e90}
+@media(max-width:980px) {
+ .kpis,.two {grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px) {
+ .wrap {padding:20px 14px 42px}
+ .kpis,.two {grid-template-columns:1fr}
+ .chart {height:350px}
+ .topbar {align-items:flex-start; flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand">A-CLUSTER | MACRO INTELLIGENCE</div>
+    <div class="badge">EUROSTAT STS_TRTU_M · JUNE 2026</div>
+  </div>
+
+  <section class="hero">
+    <div class="kicker">European Retail Demand Monitor</div>
+    <h1>Is Europe spending more — or buying more?</h1>
+    <p class="subtitle">Monthly real retail activity across the European Union and euro area, separating underlying sales volumes from nominal turnover and tracking the composition of household demand, with a five-year review of the gap between money spent and goods actually purchased.</p>
+    <p class="headline">EU27 real retail sales rose 1.4% year on year in June 2026, with a 0.2% monthly gain and 1.7% average YTD growth versus the same period of 2025. Non-food excluding fuel was the strongest major component at 3.0% YoY, while fuel volumes fell 2.5%.</p>
+  </section>
+
+  <div class="grid kpis">
+    <div class="card">
+      <div class="kpi-label">EU27 Real Retail · YoY</div>
+      <div class="kpi-value">+1.4%</div>
+      <div class="kpi-sub">Total retail volume, seasonally adjusted</div>
+    </div>
+    <div class="card">
+      <div class="kpi-label">EU27 · MoM</div>
+      <div class="kpi-value">+0.2%</div>
+      <div class="kpi-sub">Latest monthly change</div>
+    </div>
+    <div class="card">
+      <div class="kpi-label">EU27 · YTD</div>
+      <div class="kpi-value">+1.7%</div>
+      <div class="kpi-sub">Jan–Jun average vs Jan–Jun 2025</div>
+    </div>
+    <div class="card">
+      <div class="kpi-label">EU27 · 3M Momentum</div>
+      <div class="kpi-value">+0.4%</div>
+      <div class="kpi-sub">Annualized change over latest 3 months</div>
+    </div>
+  </div>
+
+  <section class="section">
+    <h2 class="section-title">EU27 and euro-area snapshot</h2>
+    <p class="section-note">Real sales-volume indicators. Index base: 2021 = 100. Growth metrics are calculated from seasonally and calendar-adjusted index levels.</p>
+    <div class="grid two">
+      <div class="card">
+        <h3>EU27</h3>
+        <table class="summary-table">
+          <thead><tr><th>Segment</th><th>YoY</th><th>MoM</th><th>YTD</th><th>3M ann.</th></tr></thead>
+          <tbody>
+            <tr><td>Total retail</td><td>+1.4%</td><td>+0.2%</td><td>+1.7%</td><td>+0.4%</td></tr><tr><td>Food, beverages & tobacco</td><td>+0.5%</td><td>-0.5%</td><td>+1.0%</td><td>+1.6%</td></tr><tr><td>Non-food ex fuel</td><td>+3.0%</td><td>+0.5%</td><td>+2.8%</td><td>+1.4%</td></tr><tr><td>Automotive fuel</td><td>-2.5%</td><td>+1.7%</td><td>-0.8%</td><td>-10.7%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>Euro area</h3>
+        <table class="summary-table">
+          <thead><tr><th>Segment</th><th>YoY</th><th>MoM</th><th>YTD</th><th>3M ann.</th></tr></thead>
+          <tbody>
+            <tr><td>Total retail</td><td>+1.3%</td><td>+0.2%</td><td>+1.6%</td><td>+0.8%</td></tr><tr><td>Food, beverages & tobacco</td><td>+0.6%</td><td>-0.6%</td><td>+1.3%</td><td>+2.1%</td></tr><tr><td>Non-food ex fuel</td><td>+2.5%</td><td>+0.5%</td><td>+2.5%</td><td>+1.5%</td></tr><tr><td>Automotive fuel</td><td>-4.5%</td><td>+1.9%</td><td>-2.3%</td><td>-12.6%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Country ranking</h2>
+    <p class="section-note">EU member states ranked by year-on-year growth in real total retail sales volume.</p>
+    <div class="card"><div id="rankingChart" class="chart tall"></div></div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Retail cycle by segment</h2>
+    <p class="section-note">EU27 versus euro area. The panels use a common 2021 = 100 index framework so the direction and persistence of the retail cycle can be compared directly.</p>
+    <div class="grid two">
+      <div class="card"><h3>Total retail volume</h3><div id="totalChart" class="chart"></div></div>
+      <div class="card"><h3>Food, beverages & tobacco</h3><div id="foodChart" class="chart"></div></div>
+      <div class="card"><h3>Non-food excluding fuel</h3><div id="nonfoodChart" class="chart"></div></div>
+      <div class="card"><h3>Automotive fuel</h3><div id="fuelChart" class="chart"></div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Nominal turnover vs real volume</h2>
+    <p class="section-note">This comparison separates the monetary value of retail sales from the quantity-adjusted volume of sales. A widening gap indicates that nominal spending is running ahead of real purchasing volumes.</p>
+    <div class="grid two">
+      <div class="card"><h3>EU27</h3><div id="nomRealEU" class="chart"></div></div>
+      <div class="card"><h3>Euro area</h3><div id="nomRealEA" class="chart"></div></div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2 class="section-title">Five-year review: spending versus purchasing power</h2>
+    <p class="section-note">The annual comparison below shows how much nominal retail turnover growth exceeded real sales-volume growth. The gap widened dramatically during the 2022–2023 price shock, then narrowed in 2024–2025 as real volumes stabilized. 2026 is year-to-date through June and is compared with Jan–Jun 2025.</p>
+    <div class="grid kpis">
+      <div class="card"><div class="kpi-label">EU27 · June 2026 turnover</div><div class="kpi-value">126.3</div><div class="kpi-sub">2021 = 100; +26.3% versus the 2021 reference level</div></div>
+      <div class="card"><div class="kpi-label">EU27 · June 2026 real volume</div><div class="kpi-value">105.3</div><div class="kpi-sub">2021 = 100; only +5.3% versus the 2021 reference level</div></div>
+      <div class="card"><div class="kpi-label">EU27 · index gap</div><div class="kpi-value">21.0 pts</div><div class="kpi-sub">Nominal turnover index minus real-volume index</div></div>
+      <div class="card"><div class="kpi-label">2022 peak annual gap</div><div class="kpi-value">8.5 pp</div><div class="kpi-sub">EU27 nominal growth 10.2% vs real growth 1.7%</div></div>
+    </div>
+    <div class="grid two">
+      <div class="card"><h3>EU27 annual nominal vs real growth</h3><div id="fiveYearEU" class="chart"></div></div>
+      <div class="card"><h3>Euro area annual nominal vs real growth</h3><div id="fiveYearEA" class="chart"></div></div>
+    </div>
+    <div class="grid two" style="margin-top:16px">
+      <div class="card"><h3>Annual nominal–real gap</h3><div id="gapChart" class="chart"></div></div>
+      <div class="card">
+        <h3>What the last five years say</h3>
+        <table class="summary-table">
+          <thead><tr><th>Period</th><th>EU27 nominal</th><th>EU27 real</th><th>Gap</th></tr></thead>
+          <tbody>
+            <tr><td>2021</td><td>+7.9%</td><td>+5.6%</td><td>+2.3 pp</td></tr>
+            <tr><td>2022</td><td>+10.2%</td><td>+1.7%</td><td>+8.5 pp</td></tr>
+            <tr><td>2023</td><td>+4.4%</td><td>-2.0%</td><td>+6.5 pp</td></tr>
+            <tr><td>2024</td><td>+2.5%</td><td>+1.4%</td><td>+1.1 pp</td></tr>
+            <tr><td>2025</td><td>+3.4%</td><td>+2.5%</td><td>+1.0 pp</td></tr>
+            <tr><td>2026 YTD</td><td>+3.6%</td><td>+1.7%</td><td>+1.9 pp</td></tr>
+          </tbody>
+        </table>
+        <p class="section-note" style="margin:16px 0 0">The central story is not simply that Europeans spent more. From 2022 onward, nominal spending rose much faster than the quantity of goods purchased. By June 2026, the EU27 turnover index stood 21 points above the real-volume index, showing how much of the post-2021 increase in retail spending was absorbed by prices rather than translated into additional purchasing volumes.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <h2 class="section-title">Five-year structural leaders: volume growth, convergence and price gaps</h2>
+    <p class="section-note">
+      This section scans every NACE Rev. 2 trade category available in the dataset and compares June 2021 with June 2026.
+      Volume growth is calculated from <code>VOL_SLS</code>; the nominal–real gap is the change in
+      <code>NETTUR − VOL_SLS</code> index points over the same period. Because the source dataset covers the full trade
+      section, the ranking includes wholesale trade and motor-vehicle activities as well as retail trade.
+    </p>
+
+    <div class="grid two">
+      <div class="card">
+        <h3>Categories with the strongest EU27 real-volume growth</h3>
+        <div id="fiveYearVolumeLeaders" class="chart tall"></div>
+      </div>
+      <div class="card">
+        <h3>Categories with the largest widening of the nominal–real gap</h3>
+        <div id="fiveYearGapLeaders" class="chart tall"></div>
+      </div>
+    </div>
+
+    <div class="grid two" style="margin-top:16px">
+      <div class="card">
+        <h3>Where did countries converge toward the EU increase?</h3>
+        <p class="section-note">
+          A country is classified as a catch-up case when it started below the EU27 volume index in June 2021,
+          recorded faster five-year volume growth than the EU27 in that category, and reduced its absolute distance
+          from the EU27 index by June 2026.
+        </p>
+        <div class="table-wrap">
+          <table class="rank-table" style="min-width:760px">
+            <thead><tr><th>Code</th><th style="text-align:left">Category</th><th>EU27 5Y volume</th><th style="text-align:left">Catch-up countries</th></tr></thead>
+            <tbody><tr><td><code>G465</code></td><td>Wholesale of ICT equipment</td><td>+17.3%</td><td>Czechia (+26.3%)</td></tr>
+<tr><td><code>G474</code></td><td>Retail sale of ICT equipment</td><td>+16.8%</td><td>Sweden (+29.1%)</td></tr>
+<tr><td><code>G4719</code></td><td>Other retail in non-specialised stores</td><td>+15.5%</td><td>Spain (+20.6%), Sweden (+20.1%)</td></tr>
+<tr><td><code>G4791</code></td><td>Mail order & internet retail</td><td>+15.5%</td><td>No EU member met the strict catch-up rule</td></tr>
+<tr><td><code>G451</code></td><td>Sale of motor vehicles</td><td>+15.4%</td><td>No EU member met the strict catch-up rule</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Which countries were outliers in the widening gap?</h3>
+        <p class="section-note">
+          Outliers are identified across available EU member states using the standard 1.5×IQR rule on the five-year
+          change in the nominal–real index gap. Where no statistical outlier exists, the country with the largest gap
+          increase is shown for context.
+        </p>
+        <div class="table-wrap">
+          <table class="rank-table" style="min-width:820px">
+            <thead><tr><th>Code</th><th style="text-align:left">Category</th><th>EU27 gap increase</th><th style="text-align:left">Country extremes</th></tr></thead>
+            <tbody><tr><td><code>G473</code></td><td>Automotive fuel retail</td><td>+31.9 pts</td><td>Romania (+56.5 pts) · high outlier; Malta (+0.7 pts) · low outlier</td></tr>
+<tr><td><code>G467</code></td><td>Other specialised wholesale</td><td>+30.5 pts</td><td>No IQR outlier; highest: Romania (+51.3 pts)</td></tr>
+<tr><td><code>G452</code></td><td>Maintenance & repair of motor vehicles</td><td>+29.4 pts</td><td>Bulgaria (+99.4 pts), Lithuania (+82.4 pts), Romania (+73.8 pts) · high outliers</td></tr>
+<tr><td><code>G463</code></td><td>Wholesale of food, beverages & tobacco</td><td>+29.3 pts</td><td>No IQR outlier; highest: Bulgaria (+47.3 pts)</td></tr>
+<tr><td><code>G47_FOOD</code></td><td>Food, beverages & tobacco retail</td><td>+28.7 pts</td><td>No IQR outlier; highest: Bulgaria (+58.7 pts)</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>Five-year reading</h3>
+      <p class="section-note" style="margin:0">
+        The strongest real expansion was not broad-based across everyday retail. It was concentrated in ICT equipment,
+        non-specialised retail, internet/non-store retail and motor-vehicle activity. By contrast, the largest widening
+        of the nominal–real gap occurred in categories exposed to large price shocks: automotive fuel, vehicle repair,
+        food-related trade and specialised wholesale. The cross-country results also show that convergence was selective
+        rather than general. Czechia caught up strongly in ICT wholesale; Sweden in ICT retail; and Spain and Sweden in
+        other non-specialised retail. On the price-gap side, Romania and Bulgaria appear repeatedly among the most extreme
+        cases, while Malta is an unusual low-gap outlier in automotive fuel.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Ranked retail table</h2>
+    <p class="section-note">All 27 EU member states. YTD is the average January–June 2026 index versus the average January–June 2025 index. 3M momentum is annualized.</p>
+    <div class="table-wrap">
+      <table class="rank-table">
+        <thead>
+          <tr>
+            <th>#</th><th style="text-align:left">Country</th><th>Total YoY</th><th>MoM</th><th>YTD</th><th>3M ann.</th><th>Food YoY</th><th>Non-food ex fuel</th><th>Fuel YoY</th>
+          </tr>
+        </thead>
+        <tbody>
+      <tr>
+        <td class="rank">1</td>
+        <td class="country">Luxembourg</td>
+        <td class="pos3">+7.8%</td>
+        <td class="pos2">+2.8%</td>
+        <td class="pos3">+8.7%</td>
+        <td class="neg3">-8.8%</td>
+        <td class="pos3">+3.4%</td>
+        <td class="pos3">+14.1%</td>
+        <td class="neg3">-3.3%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">2</td>
+        <td class="country">Sweden</td>
+        <td class="pos3">+7.1%</td>
+        <td class="pos2">+1.4%</td>
+        <td class="pos3">+5.3%</td>
+        <td class="pos3">+4.8%</td>
+        <td class="pos3">+4.7%</td>
+        <td class="pos3">+10.1%</td>
+        <td class="pos2">+1.2%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">3</td>
+        <td class="country">Bulgaria</td>
+        <td class="pos3">+7.0%</td>
+        <td class="pos1">+0.4%</td>
+        <td class="pos3">+7.5%</td>
+        <td class="pos1">+0.3%</td>
+        <td class="pos3">+4.6%</td>
+        <td class="pos3">+9.0%</td>
+        <td class="pos3">+4.3%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">4</td>
+        <td class="country">Lithuania</td>
+        <td class="pos3">+5.7%</td>
+        <td class="pos1">+0.5%</td>
+        <td class="pos3">+6.6%</td>
+        <td class="pos3">+8.1%</td>
+        <td class="pos3">+3.4%</td>
+        <td class="pos3">+12.5%</td>
+        <td class="neg3">-6.4%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">5</td>
+        <td class="country">Denmark</td>
+        <td class="pos3">+5.1%</td>
+        <td class="">0.0%</td>
+        <td class="pos3">+3.6%</td>
+        <td class="neg3">-7.2%</td>
+        <td class="neg1">-0.7%</td>
+        <td class="pos3">+10.7%</td>
+        <td class="neg3">-16.0%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">6</td>
+        <td class="country">Cyprus</td>
+        <td class="pos3">+5.0%</td>
+        <td class="neg1">-0.9%</td>
+        <td class="pos3">+6.3%</td>
+        <td class="pos3">+7.6%</td>
+        <td class="pos2">+2.1%</td>
+        <td class="pos3">+10.6%</td>
+        <td class="neg3">-3.6%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">7</td>
+        <td class="country">Latvia</td>
+        <td class="pos3">+4.9%</td>
+        <td class="pos1">+0.8%</td>
+        <td class="pos3">+4.7%</td>
+        <td class="pos3">+3.4%</td>
+        <td class="pos3">+4.6%</td>
+        <td class="pos3">+5.9%</td>
+        <td class="pos2">+2.5%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">8</td>
+        <td class="country">Malta</td>
+        <td class="pos3">+4.1%</td>
+        <td class="pos1">+0.2%</td>
+        <td class="pos3">+5.8%</td>
+        <td class="pos3">+7.1%</td>
+        <td class="pos3">+4.6%</td>
+        <td class="pos3">+4.1%</td>
+        <td class="pos3">+6.7%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">9</td>
+        <td class="country">Czechia</td>
+        <td class="pos3">+3.7%</td>
+        <td class="neg1">-0.1%</td>
+        <td class="pos3">+3.9%</td>
+        <td class="">0.0%</td>
+        <td class="pos2">+2.1%</td>
+        <td class="pos3">+5.6%</td>
+        <td class="pos1">+0.2%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">10</td>
+        <td class="country">Hungary</td>
+        <td class="pos3">+3.4%</td>
+        <td class="neg1">-0.3%</td>
+        <td class="pos3">+4.2%</td>
+        <td class="neg3">-3.3%</td>
+        <td class="pos2">+1.8%</td>
+        <td class="pos3">+5.2%</td>
+        <td class="">0.0%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">11</td>
+        <td class="country">Poland</td>
+        <td class="pos3">+3.2%</td>
+        <td class="pos1">+0.6%</td>
+        <td class="pos2">+3.0%</td>
+        <td class="pos3">+6.2%</td>
+        <td class="neg2">-1.6%</td>
+        <td class="pos3">+3.3%</td>
+        <td class="pos3">+23.5%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">12</td>
+        <td class="country">Finland</td>
+        <td class="pos2">+2.7%</td>
+        <td class="neg2">-1.4%</td>
+        <td class="pos3">+3.1%</td>
+        <td class="neg3">-3.7%</td>
+        <td class="pos2">+2.0%</td>
+        <td class="pos2">+2.8%</td>
+        <td class="pos3">+9.7%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">13</td>
+        <td class="country">Portugal</td>
+        <td class="pos2">+2.7%</td>
+        <td class="pos2">+1.3%</td>
+        <td class="pos3">+4.0%</td>
+        <td class="pos2">+2.0%</td>
+        <td class="pos2">+1.3%</td>
+        <td class="pos3">+5.1%</td>
+        <td class="neg2">-2.3%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">14</td>
+        <td class="country">France</td>
+        <td class="pos2">+2.5%</td>
+        <td class="pos1">+0.4%</td>
+        <td class="pos2">+2.4%</td>
+        <td class="pos2">+3.0%</td>
+        <td class="pos2">+2.0%</td>
+        <td class="pos3">+4.5%</td>
+        <td class="neg3">-7.8%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">15</td>
+        <td class="country">Greece</td>
+        <td class="pos2">+1.9%</td>
+        <td class="neg2">-1.4%</td>
+        <td class="pos3">+3.2%</td>
+        <td class="pos2">+1.2%</td>
+        <td class="pos2">+2.4%</td>
+        <td class="pos3">+4.2%</td>
+        <td class="neg3">-6.6%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">16</td>
+        <td class="country">Slovenia</td>
+        <td class="pos2">+1.6%</td>
+        <td class="neg1">-0.6%</td>
+        <td class="pos2">+1.7%</td>
+        <td class="neg3">-5.6%</td>
+        <td class="pos2">+1.6%</td>
+        <td class="pos2">+1.2%</td>
+        <td class="pos2">+1.8%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">17</td>
+        <td class="country">Netherlands</td>
+        <td class="pos2">+1.5%</td>
+        <td class="pos1">+0.2%</td>
+        <td class="pos2">+1.1%</td>
+        <td class="neg1">-0.4%</td>
+        <td class="pos2">+1.8%</td>
+        <td class="pos2">+2.7%</td>
+        <td class="">—</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">18</td>
+        <td class="country">Slovakia</td>
+        <td class="pos1">+0.7%</td>
+        <td class="pos1">+0.4%</td>
+        <td class="pos1">+0.1%</td>
+        <td class="neg3">-5.6%</td>
+        <td class="pos1">+0.6%</td>
+        <td class="pos1">+0.6%</td>
+        <td class="neg1">-0.9%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">19</td>
+        <td class="country">Spain</td>
+        <td class="pos1">+0.6%</td>
+        <td class="pos1">+0.4%</td>
+        <td class="pos2">+2.0%</td>
+        <td class="neg2">-2.5%</td>
+        <td class="pos1">+0.4%</td>
+        <td class="pos2">+3.0%</td>
+        <td class="neg3">-4.6%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">20</td>
+        <td class="country">Germany</td>
+        <td class="pos1">+0.6%</td>
+        <td class="">0.0%</td>
+        <td class="pos1">+0.9%</td>
+        <td class="pos2">+2.4%</td>
+        <td class="neg1">-0.4%</td>
+        <td class="pos2">+1.3%</td>
+        <td class="neg2">-1.5%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">21</td>
+        <td class="country">Ireland</td>
+        <td class="pos1">+0.5%</td>
+        <td class="pos1">+0.4%</td>
+        <td class="pos1">+0.8%</td>
+        <td class="pos2">+1.1%</td>
+        <td class="pos2">+1.6%</td>
+        <td class="pos1">+0.3%</td>
+        <td class="neg3">-3.5%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">22</td>
+        <td class="country">Estonia</td>
+        <td class="pos1">+0.4%</td>
+        <td class="pos1">+0.9%</td>
+        <td class="pos2">+3.0%</td>
+        <td class="neg3">-11.4%</td>
+        <td class="pos2">+1.2%</td>
+        <td class="neg2">-1.2%</td>
+        <td class="pos1">+0.1%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">23</td>
+        <td class="country">Austria</td>
+        <td class="pos1">+0.4%</td>
+        <td class="neg1">-0.1%</td>
+        <td class="pos1">+0.2%</td>
+        <td class="pos1">+0.8%</td>
+        <td class="pos2">+2.8%</td>
+        <td class="neg2">-1.2%</td>
+        <td class="neg3">-6.6%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">24</td>
+        <td class="country">Croatia</td>
+        <td class="pos1">+0.3%</td>
+        <td class="pos2">+1.5%</td>
+        <td class="pos2">+2.0%</td>
+        <td class="neg2">-2.7%</td>
+        <td class="pos2">+2.9%</td>
+        <td class="pos2">+1.7%</td>
+        <td class="neg3">-14.1%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">25</td>
+        <td class="country">Italy</td>
+        <td class="pos1">+0.2%</td>
+        <td class="">0.0%</td>
+        <td class="pos1">+0.6%</td>
+        <td class="neg2">-1.2%</td>
+        <td class="neg2">-1.4%</td>
+        <td class="pos2">+1.5%</td>
+        <td class="neg1">-0.4%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">26</td>
+        <td class="country">Belgium</td>
+        <td class="neg1">-0.1%</td>
+        <td class="pos1">+0.8%</td>
+        <td class="neg1">-0.1%</td>
+        <td class="neg3">-7.0%</td>
+        <td class="neg2">-1.1%</td>
+        <td class="pos2">+1.8%</td>
+        <td class="neg2">-2.0%</td>
+      </tr>
+    
+      <tr>
+        <td class="rank">27</td>
+        <td class="country">Romania</td>
+        <td class="neg3">-7.4%</td>
+        <td class="neg2">-1.3%</td>
+        <td class="neg3">-5.7%</td>
+        <td class="neg3">-11.1%</td>
+        <td class="neg3">-7.3%</td>
+        <td class="neg3">-6.7%</td>
+        <td class="neg3">-5.9%</td>
+      </tr>
+    </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="footer">
+    <strong>Source:</strong> Eurostat, Short-Term Business Statistics, dataset <code>STS_TRTU_M</code>. Indicators shown here use <code>VOL_SLS</code> for real volume and <code>NETTUR</code> for nominal turnover, with <code>SCA</code> seasonal/calendar adjustment and <code>I21</code> index levels (2021 = 100).<br>
+    <strong>Methodology:</strong> YoY = latest month vs same month one year earlier. MoM = latest month vs previous month. YTD = average index for Jan–Jun 2026 vs Jan–Jun 2025. 3M momentum = annualized percentage change from March to June 2026. The nominal–real gap is descriptive and should not be read as an official inflation measure. Five-year cross-sectional comparisons use June 2021 to June 2026. Country outliers use the 1.5×IQR rule on changes in the nominal–real index gap.<br>
+    <strong>Prepared by A-CLUSTER Macro Intelligence.</strong>
+  </div>
+</div>
+
+<script>
+const DATA = {"total_eu": {"dates": ["2019-01-01", "2019-02-01", "2019-03-01", "2019-04-01", "2019-05-01", "2019-06-01", "2019-07-01", "2019-08-01", "2019-09-01", "2019-10-01", "2019-11-01", "2019-12-01", "2020-01-01", "2020-02-01", "2020-03-01", "2020-04-01", "2020-05-01", "2020-06-01", "2020-07-01", "2020-08-01", "2020-09-01", "2020-10-01", "2020-11-01", "2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01", "2021-04-01", "2021-05-01", "2021-06-01", "2021-07-01", "2021-08-01", "2021-09-01", "2021-10-01", "2021-11-01", "2021-12-01", "2022-01-01", "2022-02-01", "2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01"], "values": [94.5, 94.8, 94.6, 95.5, 94.4, 95.6, 95.5, 95.8, 95.8, 95.7, 96.1, 96.4, 97.2, 97.8, 87.5, 78.6, 92.1, 96.7, 96.7, 99.6, 98.4, 99.7, 94.0, 97.9, 92.8, 96.3, 98.9, 96.3, 100.8, 102.7, 101.3, 101.8, 101.6, 102.8, 102.6, 102.1, 102.1, 102.8, 102.9, 102.5, 102.5, 101.5, 101.2, 101.3, 102.2, 100.7, 100.7, 100.1, 100.3, 99.9, 99.2, 99.3, 99.8, 100.1, 99.9, 99.1, 99.2, 99.5, 100.0, 99.6, 99.8, 100.4, 100.5, 100.5, 100.7, 100.0, 100.8, 101.9, 102.2, 101.9, 102.0, 102.0, 102.3, 102.6, 102.6, 103.7, 103.0, 103.8, 103.7, 103.7, 103.9, 104.3, 104.4, 104.4, 104.5, 104.0, 105.2, 104.6, 105.1, 105.3]}, "total_ea": {"dates": ["2019-01-01", "2019-02-01", "2019-03-01", "2019-04-01", "2019-05-01", "2019-06-01", "2019-07-01", "2019-08-01", "2019-09-01", "2019-10-01", "2019-11-01", "2019-12-01", "2020-01-01", "2020-02-01", "2020-03-01", "2020-04-01", "2020-05-01", "2020-06-01", "2020-07-01", "2020-08-01", "2020-09-01", "2020-10-01", "2020-11-01", "2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01", "2021-04-01", "2021-05-01", "2021-06-01", "2021-07-01", "2021-08-01", "2021-09-01", "2021-10-01", "2021-11-01", "2021-12-01", "2022-01-01", "2022-02-01", "2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01"], "values": [95.4, 95.7, 95.2, 96.0, 95.2, 96.4, 96.2, 96.5, 96.5, 96.2, 96.6, 96.8, 97.5, 98.2, 86.8, 77.5, 92.4, 97.3, 97.0, 100.5, 98.9, 100.3, 93.8, 98.2, 92.6, 96.3, 99.0, 96.4, 100.8, 102.9, 101.2, 101.9, 101.5, 102.8, 102.7, 102.0, 101.9, 102.6, 102.3, 102.0, 102.1, 101.2, 100.9, 101.0, 102.1, 100.5, 100.4, 99.8, 99.9, 99.7, 98.9, 99.1, 99.6, 100.0, 99.9, 98.8, 98.8, 99.2, 99.8, 99.3, 99.4, 99.9, 100.1, 100.1, 100.4, 99.5, 100.3, 101.5, 102.0, 101.5, 101.5, 101.6, 101.9, 102.3, 102.3, 103.2, 102.5, 103.3, 103.2, 103.2, 103.4, 103.8, 103.8, 103.9, 104.0, 103.6, 104.4, 104.1, 104.4, 104.6]}, "food_eu": {"dates": ["2019-01-01", "2019-02-01", "2019-03-01", "2019-04-01", "2019-05-01", "2019-06-01", "2019-07-01", "2019-08-01", "2019-09-01", "2019-10-01", "2019-11-01", "2019-12-01", "2020-01-01", "2020-02-01", "2020-03-01", "2020-04-01", "2020-05-01", "2020-06-01", "2020-07-01", "2020-08-01", "2020-09-01", "2020-10-01", "2020-11-01", "2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01", "2021-04-01", "2021-05-01", "2021-06-01", "2021-07-01", "2021-08-01", "2021-09-01", "2021-10-01", "2021-11-01", "2021-12-01", "2022-01-01", "2022-02-01", "2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01"], "values": [95.3, 95.3, 95.1, 96.5, 95.3, 96.9, 96.3, 96.4, 96.0, 96.3, 96.6, 96.2, 96.3, 98.2, 102.6, 97.3, 99.6, 97.5, 97.8, 99.6, 98.4, 100.5, 98.7, 101.6, 100.6, 100.6, 101.3, 101.2, 100.2, 99.4, 99.1, 98.5, 99.1, 99.7, 99.8, 100.6, 100.6, 100.3, 100.4, 99.1, 98.2, 98.2, 97.8, 97.5, 97.0, 96.4, 96.1, 94.6, 96.3, 95.8, 94.5, 95.1, 95.4, 95.5, 95.8, 95.2, 96.2, 95.5, 95.6, 95.3, 95.6, 95.9, 96.1, 95.8, 96.6, 95.7, 96.3, 97.0, 96.8, 96.8, 96.9, 96.5, 96.9, 97.2, 97.0, 97.9, 97.2, 97.8, 97.1, 97.5, 97.3, 97.8, 97.8, 98.0, 98.3, 97.8, 97.9, 98.5, 98.8, 98.3]}, "food_ea": {"dates": ["2019-01-01", "2019-02-01", "2019-03-01", "2019-04-01", "2019-05-01", "2019-06-01", "2019-07-01", "2019-08-01", "2019-09-01", "2019-10-01", "2019-11-01", "2019-12-01", "2020-01-01", "2020-02-01", "2020-03-01", "2020-04-01", "2020-05-01", "2020-06-01", "2020-07-01", "2020-08-01", "2020-09-01", "2020-10-01", "2020-11-01", "2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01", "2021-04-01", "2021-05-01", "2021-06-01", "2021-07-01", "2021-08-01", "2021-09-01", "2021-10-01", "2021-11-01", "2021-12-01", "2022-01-01", "2022-02-01", "2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01"], "values": [95.1, 95.0, 94.8, 95.9, 94.8, 96.5, 96.0, 96.0, 95.7, 95.8, 96.2, 95.6, 95.8, 98.0, 102.7, 97.7, 100.2, 97.6, 97.6, 99.7, 98.2, 100.6, 98.5, 101.8, 101.0, 100.8, 101.6, 101.6, 100.5, 99.2, 98.8, 98.3, 98.7, 99.4, 99.6, 100.4, 100.4, 100.0, 99.8, 98.4, 97.5, 97.5, 97.2, 96.9, 96.5, 95.8, 95.4, 94.0, 95.8, 95.4, 94.0, 94.7, 94.8, 94.9, 95.3, 94.6, 95.6, 95.0, 95.1, 94.7, 94.8, 95.0, 95.5, 95.0, 95.9, 95.1, 95.6, 96.3, 96.1, 96.1, 96.3, 95.8, 96.4, 96.7, 96.7, 97.4, 96.8, 97.6, 96.7, 97.1, 97.1, 97.5, 97.3, 97.6, 98.2, 97.7, 97.7, 98.4, 98.8, 98.2]}, "nonfood_eu": {"dates": ["2019-01-01", "2019-02-01", "2019-03-01", "2019-04-01", "2019-05-01", "2019-06-01", "2019-07-01", "2019-08-01", "2019-09-01", "2019-10-01", "2019-11-01", "2019-12-01", "2020-01-01", "2020-02-01", "2020-03-01", "2020-04-01", "2020-05-01", "2020-06-01", "2020-07-01", "2020-08-01", "2020-09-01", "2020-10-01", "2020-11-01", "2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01", "2021-04-01", "2021-05-01", "2021-06-01", "2021-07-01", "2021-08-01", "2021-09-01", "2021-10-01", "2021-11-01", "2021-12-01", "2022-01-01", "2022-02-01", "2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01"], "values": [91.9, 92.5, 92.1, 92.9, 92.3, 93.3, 93.4, 93.8, 94.2, 93.6, 94.2, 94.9, 96.1, 96.1, 76.8, 67.1, 88.5, 96.8, 95.5, 99.3, 98.2, 99.5, 91.7, 95.3, 87.2, 93.4, 97.6, 93.5, 101.2, 105.1, 102.4, 104.2, 103.0, 104.9, 104.5, 103.0, 103.4, 104.2, 104.5, 104.6, 105.2, 103.7, 103.3, 103.5, 105.2, 102.9, 103.3, 103.2, 103.3, 102.8, 101.9, 102.4, 103.0, 103.6, 103.3, 102.7, 101.4, 102.7, 103.3, 102.7, 102.9, 104.0, 103.7, 104.1, 103.9, 103.3, 104.3, 105.7, 106.6, 106.0, 105.9, 106.5, 106.6, 106.9, 107.0, 108.2, 107.4, 108.3, 108.8, 108.7, 109.0, 109.4, 109.7, 109.6, 109.6, 109.1, 111.1, 110.1, 111.0, 111.5]}, "nonfood_ea": {"dates": ["2019-01-01", "2019-02-01", "2019-03-01", "2019-04-01", "2019-05-01", "2019-06-01", "2019-07-01", "2019-08-01", "2019-09-01", "2019-10-01", "2019-11-01", "2019-12-01", "2020-01-01", "2020-02-01", "2020-03-01", "2020-04-01", "2020-05-01", "2020-06-01", "2020-07-01", "2020-08-01", "2020-09-01", "2020-10-01", "2020-11-01", "2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01", "2021-04-01", "2021-05-01", "2021-06-01", "2021-07-01", "2021-08-01", "2021-09-01", "2021-10-01", "2021-11-01", "2021-12-01", "2022-01-01", "2022-02-01", "2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01"], "values": [93.6, 94.3, 93.5, 94.4, 93.8, 94.7, 94.8, 95.1, 95.5, 94.7, 95.2, 95.9, 96.9, 96.8, 75.7, 65.0, 88.5, 97.7, 96.0, 100.7, 99.1, 100.5, 91.5, 95.7, 86.2, 93.1, 97.8, 93.2, 101.2, 105.6, 102.4, 104.5, 103.1, 105.2, 104.8, 102.9, 103.4, 104.4, 104.2, 104.3, 105.4, 103.9, 103.4, 103.7, 105.5, 103.1, 103.4, 103.3, 103.1, 102.8, 101.9, 102.2, 102.9, 103.7, 103.5, 102.6, 101.2, 102.5, 103.2, 102.5, 102.7, 103.6, 103.4, 103.8, 103.7, 102.9, 103.9, 105.4, 106.6, 105.7, 105.5, 106.0, 106.2, 106.5, 106.6, 107.6, 106.9, 107.9, 108.4, 108.2, 108.3, 108.7, 109.1, 108.8, 108.9, 108.5, 110.2, 109.4, 110.1, 110.6]}, "fuel_eu": {"dates": ["2019-01-01", "2019-02-01", "2019-03-01", "2019-04-01", "2019-05-01", "2019-06-01", "2019-07-01", "2019-08-01", "2019-09-01", "2019-10-01", "2019-11-01", "2019-12-01", "2020-01-01", "2020-02-01", "2020-03-01", "2020-04-01", "2020-05-01", "2020-06-01", "2020-07-01", "2020-08-01", "2020-09-01", "2020-10-01", "2020-11-01", "2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01", "2021-04-01", "2021-05-01", "2021-06-01", "2021-07-01", "2021-08-01", "2021-09-01", "2021-10-01", "2021-11-01", "2021-12-01", "2022-01-01", "2022-02-01", "2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01"], "values": [107.7, 107.2, 107.8, 107.5, 105.2, 106.6, 105.4, 105.6, 105.3, 106.2, 105.9, 107.3, 108.4, 107.7, 82.2, 59.5, 78.8, 92.5, 99.1, 101.5, 99.8, 97.0, 87.6, 93.1, 93.2, 95.1, 95.0, 92.4, 99.7, 103.3, 104.4, 103.3, 103.9, 103.9, 102.9, 103.0, 101.3, 106.0, 103.7, 105.8, 105.2, 103.7, 104.3, 105.7, 107.5, 107.4, 107.3, 108.9, 104.2, 104.2, 105.1, 101.7, 103.6, 102.6, 102.5, 99.8, 101.3, 102.3, 102.4, 103.7, 103.3, 103.2, 103.2, 103.2, 103.2, 102.7, 102.7, 103.8, 103.6, 102.8, 104.2, 103.5, 103.9, 105.3, 105.4, 107.9, 106.9, 107.6, 106.3, 106.1, 106.1, 106.6, 106.5, 106.8, 105.5, 106.2, 107.9, 104.6, 103.1, 104.9]}, "fuel_ea": {"dates": ["2019-01-01", "2019-02-01", "2019-03-01", "2019-04-01", "2019-05-01", "2019-06-01", "2019-07-01", "2019-08-01", "2019-09-01", "2019-10-01", "2019-11-01", "2019-12-01", "2020-01-01", "2020-02-01", "2020-03-01", "2020-04-01", "2020-05-01", "2020-06-01", "2020-07-01", "2020-08-01", "2020-09-01", "2020-10-01", "2020-11-01", "2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01", "2021-04-01", "2021-05-01", "2021-06-01", "2021-07-01", "2021-08-01", "2021-09-01", "2021-10-01", "2021-11-01", "2021-12-01", "2022-01-01", "2022-02-01", "2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01"], "values": [109.0, 108.5, 108.3, 108.0, 106.3, 108.0, 106.4, 106.7, 106.0, 106.9, 106.8, 108.4, 109.5, 108.5, 79.6, 55.1, 77.0, 92.7, 99.9, 102.5, 100.6, 97.8, 85.9, 92.8, 92.0, 94.6, 93.9, 91.3, 100.1, 103.7, 104.8, 103.9, 104.7, 104.6, 103.2, 103.3, 100.4, 104.0, 102.0, 104.5, 103.7, 102.5, 103.4, 104.6, 107.1, 107.0, 106.3, 107.3, 103.5, 104.2, 104.9, 101.6, 103.5, 102.8, 102.8, 99.5, 101.1, 101.6, 103.0, 104.1, 103.7, 102.4, 103.0, 102.9, 103.4, 102.5, 103.1, 104.5, 103.9, 103.4, 104.5, 104.0, 104.1, 104.6, 104.9, 107.4, 106.5, 107.0, 105.7, 105.6, 105.6, 106.0, 105.6, 105.9, 104.7, 104.8, 105.7, 102.0, 100.3, 102.2]}, "turnover_eu": {"dates": ["2019-01-01", "2019-02-01", "2019-03-01", "2019-04-01", "2019-05-01", "2019-06-01", "2019-07-01", "2019-08-01", "2019-09-01", "2019-10-01", "2019-11-01", "2019-12-01", "2020-01-01", "2020-02-01", "2020-03-01", "2020-04-01", "2020-05-01", "2020-06-01", "2020-07-01", "2020-08-01", "2020-09-01", "2020-10-01", "2020-11-01", "2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01", "2021-04-01", "2021-05-01", "2021-06-01", "2021-07-01", "2021-08-01", "2021-09-01", "2021-10-01", "2021-11-01", "2021-12-01", "2022-01-01", "2022-02-01", "2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01"], "values": [91.8, 92.4, 92.2, 93.2, 92.4, 93.4, 93.3, 93.7, 93.8, 93.7, 94.3, 94.9, 95.7, 96.2, 85.7, 76.8, 89.7, 94.3, 95.0, 97.2, 96.0, 97.5, 92.3, 96.0, 91.6, 95.3, 97.9, 95.3, 99.9, 102.2, 101.2, 102.1, 102.1, 103.8, 104.4, 104.1, 105.0, 106.6, 108.7, 108.8, 110.0, 110.6, 110.7, 111.1, 112.7, 112.2, 113.0, 112.5, 113.8, 114.0, 113.8, 114.1, 114.6, 115.4, 115.3, 115.3, 115.8, 116.0, 116.4, 116.0, 116.2, 116.9, 117.0, 117.1, 117.4, 116.7, 117.6, 118.8, 119.0, 118.9, 119.4, 119.7, 120.3, 120.7, 120.4, 121.5, 120.9, 122.1, 122.2, 122.3, 122.6, 123.2, 123.5, 123.6, 123.8, 123.4, 126.1, 125.9, 126.5, 126.3]}, "volume_eu": {"dates": ["2019-01-01", "2019-02-01", "2019-03-01", "2019-04-01", "2019-05-01", "2019-06-01", "2019-07-01", "2019-08-01", "2019-09-01", "2019-10-01", "2019-11-01", "2019-12-01", "2020-01-01", "2020-02-01", "2020-03-01", "2020-04-01", "2020-05-01", "2020-06-01", "2020-07-01", "2020-08-01", "2020-09-01", "2020-10-01", "2020-11-01", "2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01", "2021-04-01", "2021-05-01", "2021-06-01", "2021-07-01", "2021-08-01", "2021-09-01", "2021-10-01", "2021-11-01", "2021-12-01", "2022-01-01", "2022-02-01", "2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01"], "values": [94.5, 94.8, 94.6, 95.5, 94.4, 95.6, 95.5, 95.8, 95.8, 95.7, 96.1, 96.4, 97.2, 97.8, 87.5, 78.6, 92.1, 96.7, 96.7, 99.6, 98.4, 99.7, 94.0, 97.9, 92.8, 96.3, 98.9, 96.3, 100.8, 102.7, 101.3, 101.8, 101.6, 102.8, 102.6, 102.1, 102.1, 102.8, 102.9, 102.5, 102.5, 101.5, 101.2, 101.3, 102.2, 100.7, 100.7, 100.1, 100.3, 99.9, 99.2, 99.3, 99.8, 100.1, 99.9, 99.1, 99.2, 99.5, 100.0, 99.6, 99.8, 100.4, 100.5, 100.5, 100.7, 100.0, 100.8, 101.9, 102.2, 101.9, 102.0, 102.0, 102.3, 102.6, 102.6, 103.7, 103.0, 103.8, 103.7, 103.7, 103.9, 104.3, 104.4, 104.4, 104.5, 104.0, 105.2, 104.6, 105.1, 105.3]}, "turnover_ea": {"dates": ["2019-01-01", "2019-02-01", "2019-03-01", "2019-04-01", "2019-05-01", "2019-06-01", "2019-07-01", "2019-08-01", "2019-09-01", "2019-10-01", "2019-11-01", "2019-12-01", "2020-01-01", "2020-02-01", "2020-03-01", "2020-04-01", "2020-05-01", "2020-06-01", "2020-07-01", "2020-08-01", "2020-09-01", "2020-10-01", "2020-11-01", "2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01", "2021-04-01", "2021-05-01", "2021-06-01", "2021-07-01", "2021-08-01", "2021-09-01", "2021-10-01", "2021-11-01", "2021-12-01", "2022-01-01", "2022-02-01", "2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01"], "values": [93.1, 93.7, 93.2, 94.2, 93.5, 94.5, 94.4, 94.7, 94.8, 94.5, 95.0, 95.5, 96.3, 96.8, 85.3, 76.0, 90.4, 95.1, 95.7, 98.3, 96.7, 98.3, 92.2, 96.4, 91.4, 95.3, 98.0, 95.4, 100.1, 102.5, 101.1, 102.1, 102.0, 103.7, 104.3, 103.9, 104.7, 106.2, 107.7, 107.7, 109.0, 109.6, 109.7, 110.0, 111.7, 111.0, 111.7, 111.1, 112.5, 112.9, 112.4, 112.8, 113.3, 114.1, 114.1, 113.9, 114.3, 114.6, 115.1, 114.6, 114.7, 115.2, 115.4, 115.4, 115.8, 114.8, 115.7, 117.1, 117.4, 117.1, 117.5, 117.8, 118.4, 118.8, 118.5, 119.3, 118.8, 120.0, 120.0, 120.2, 120.4, 120.9, 121.2, 121.3, 121.7, 121.5, 123.6, 123.7, 124.2, 123.9]}, "volume_ea": {"dates": ["2019-01-01", "2019-02-01", "2019-03-01", "2019-04-01", "2019-05-01", "2019-06-01", "2019-07-01", "2019-08-01", "2019-09-01", "2019-10-01", "2019-11-01", "2019-12-01", "2020-01-01", "2020-02-01", "2020-03-01", "2020-04-01", "2020-05-01", "2020-06-01", "2020-07-01", "2020-08-01", "2020-09-01", "2020-10-01", "2020-11-01", "2020-12-01", "2021-01-01", "2021-02-01", "2021-03-01", "2021-04-01", "2021-05-01", "2021-06-01", "2021-07-01", "2021-08-01", "2021-09-01", "2021-10-01", "2021-11-01", "2021-12-01", "2022-01-01", "2022-02-01", "2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01"], "values": [95.4, 95.7, 95.2, 96.0, 95.2, 96.4, 96.2, 96.5, 96.5, 96.2, 96.6, 96.8, 97.5, 98.2, 86.8, 77.5, 92.4, 97.3, 97.0, 100.5, 98.9, 100.3, 93.8, 98.2, 92.6, 96.3, 99.0, 96.4, 100.8, 102.9, 101.2, 101.9, 101.5, 102.8, 102.7, 102.0, 101.9, 102.6, 102.3, 102.0, 102.1, 101.2, 100.9, 101.0, 102.1, 100.5, 100.4, 99.8, 99.9, 99.7, 98.9, 99.1, 99.6, 100.0, 99.9, 98.8, 98.8, 99.2, 99.8, 99.3, 99.4, 99.9, 100.1, 100.1, 100.4, 99.5, 100.3, 101.5, 102.0, 101.5, 101.5, 101.6, 101.9, 102.3, 102.3, 103.2, 102.5, 103.3, 103.2, 103.2, 103.4, 103.8, 103.8, 103.9, 104.0, 103.6, 104.4, 104.1, 104.4, 104.6]}};
+const RANK = {"countries": ["Luxembourg", "Sweden", "Bulgaria", "Lithuania", "Denmark", "Cyprus", "Latvia", "Malta", "Czechia", "Hungary", "Poland", "Finland", "Portugal", "France", "Greece", "Slovenia", "Netherlands", "Slovakia", "Spain", "Germany", "Ireland", "Estonia", "Austria", "Croatia", "Italy", "Belgium", "Romania"], "yoy": [7.8, 7.14, 6.97, 5.72, 5.11, 5.02, 4.86, 4.12, 3.72, 3.4, 3.24, 2.74, 2.73, 2.45, 1.87, 1.58, 1.48, 0.69, 0.63, 0.59, 0.54, 0.43, 0.41, 0.34, 0.2, -0.11, -7.39], "nonfood": [14.11, 10.05, 9.03, 12.46, 10.68, 10.55, 5.88, 4.1, 5.61, 5.24, 3.33, 2.84, 5.12, 4.52, 4.19, 1.24, 2.73, 0.55, 2.99, 1.33, 0.33, -1.19, -1.23, 1.67, 1.54, 1.75, -6.73]};
+const config = {responsive:true, displaylogo:false, modeBarButtonsToRemove:['lasso2d','select2d']};
+const baseLayout = {
+  paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)',
+  font:{color:'#dce8f5', family:'Inter, system-ui, sans-serif'},
+  margin:{l:48,r:20,t:18,b:48},
+  xaxis:{gridcolor:'#173047', zeroline:false, tickfont:{color:'#91a5bb'}},
+  yaxis:{gridcolor:'#173047', zeroline:false, tickfont:{color:'#91a5bb'}},
+  legend:{orientation:'h', y:1.08, x:0, font:{color:'#b6c8da'}},
+  hoverlabel:{bgcolor:'#0d1b2b', font:{color:'#fff'}}
+};
+function lineChart(id, a, b, labelA='EU27', labelB='Euro area') {
+  Plotly.newPlot(id, [
+    {x:a.dates,y:a.values,type:'scatter',mode:'lines',name:labelA,line:{width:2.6}},
+    {x:b.dates,y:b.values,type:'scatter',mode:'lines',name:labelB,line:{width:2.2,dash:'dot'}}
+  ], {...baseLayout, yaxis:{...baseLayout.yaxis, title:'Index (2021=100)'}}, config);
+}
+lineChart('totalChart', DATA.total_eu, DATA.total_ea);
+lineChart('foodChart', DATA.food_eu, DATA.food_ea);
+lineChart('nonfoodChart', DATA.nonfood_eu, DATA.nonfood_ea);
+lineChart('fuelChart', DATA.fuel_eu, DATA.fuel_ea);
+
+Plotly.newPlot('nomRealEU', [
+  {x:DATA.turnover_eu.dates,y:DATA.turnover_eu.values,type:'scatter',mode:'lines',name:'Net turnover',line:{width:2.6}},
+  {x:DATA.volume_eu.dates,y:DATA.volume_eu.values,type:'scatter',mode:'lines',name:'Real volume',line:{width:2.6,dash:'dot'}}
+], {...baseLayout,yaxis:{...baseLayout.yaxis,title:'Index (2021=100)'}}, config);
+
+Plotly.newPlot('nomRealEA', [
+  {x:DATA.turnover_ea.dates,y:DATA.turnover_ea.values,type:'scatter',mode:'lines',name:'Net turnover',line:{width:2.6}},
+  {x:DATA.volume_ea.dates,y:DATA.volume_ea.values,type:'scatter',mode:'lines',name:'Real volume',line:{width:2.6,dash:'dot'}}
+], {...baseLayout,yaxis:{...baseLayout.yaxis,title:'Index (2021=100)'}}, config);
+
+
+const FIVE_YEAR = {
+  years:['2021','2022','2023','2024','2025','2026 YTD'],
+  euNominal:[7.87,10.17,4.43,2.48,3.44,3.60],
+  euReal:[5.62,1.71,-2.02,1.40,2.45,1.73],
+  euGap:[2.25,8.46,6.45,1.07,0.99,1.86],
+  eaNominal:[7.36,9.19,4.16,2.15,3.15,3.47],
+  eaReal:[5.42,1.39,-1.96,1.24,2.40,1.56],
+  eaGap:[1.94,7.80,6.12,0.91,0.75,1.91]
+};
+function annualCompare(id, nominal, real) {
+  Plotly.newPlot(id,[
+    {x:FIVE_YEAR.years,y:nominal,type:'bar',name:'Net turnover growth'},
+    {x:FIVE_YEAR.years,y:real,type:'bar',name:'Real volume growth'}
+  ],{...baseLayout,barmode:'group',yaxis:{...baseLayout.yaxis,title:'Annual growth (%)',zeroline:true,zerolinecolor:'#7f93a8'}},config);
+}
+annualCompare('fiveYearEU',FIVE_YEAR.euNominal,FIVE_YEAR.euReal);
+annualCompare('fiveYearEA',FIVE_YEAR.eaNominal,FIVE_YEAR.eaReal);
+Plotly.newPlot('gapChart',[
+  {x:FIVE_YEAR.years,y:FIVE_YEAR.euGap,type:'scatter',mode:'lines+markers',name:'EU27',line:{width:2.6}},
+  {x:FIVE_YEAR.years,y:FIVE_YEAR.eaGap,type:'scatter',mode:'lines+markers',name:'Euro area',line:{width:2.2,dash:'dot'}}
+],{...baseLayout,yaxis:{...baseLayout.yaxis,title:'Nominal–real gap (pp)',rangemode:'tozero'}},config);
+
+
+const FIVE_YEAR_CROSS_SECTION = {"volumeLabels": ["G465 · Wholesale of ICT equipment", "G474 · Retail sale of ICT equipment", "G4719 · Other retail in non-specialised stores", "G4791 · Mail order & internet retail", "G451 · Sale of motor vehicles", "G479 · Retail trade not in stores, stalls or markets", "G45 · Motor-vehicle trade & repair", "G477 · Other goods in specialised stores", "G47_NFOOD_X_G473 · Non-food retail excl. fuel", "G453 · Motor-vehicle parts & accessories"], "volumeGrowth": [17.3, 16.8, 15.5, 15.5, 15.4, 12.6, 11.4, 8.8, 6.1, 4.1], "gapLabels": ["G473 · Automotive fuel retail", "G467 · Other specialised wholesale", "G452 · Maintenance & repair of motor vehicles", "G463 · Wholesale of food, beverages & tobacco", "G47_FOOD · Food, beverages & tobacco retail", "G4711 · Non-specialised stores, food predominating", "G472 · Specialised food, beverages & tobacco retail", "G471 · Retail sale in non-specialised stores", "G461 · Wholesale on a fee or contract basis", "G478 · Retail via stalls & markets"], "gapChange": [31.9, 30.5, 29.4, 29.3, 28.7, 28.4, 28.1, 26.5, 25.3, 24.1]};
+
+Plotly.newPlot('fiveYearVolumeLeaders', [{
+  x:FIVE_YEAR_CROSS_SECTION.volumeGrowth.slice().reverse(),
+  y:FIVE_YEAR_CROSS_SECTION.volumeLabels.slice().reverse(),
+  type:'bar',
+  orientation:'h',
+  text:FIVE_YEAR_CROSS_SECTION.volumeGrowth.slice().reverse().map(v => '+' + v.toFixed(1) + '%'),
+  textposition:'outside',
+  cliponaxis:false,
+  hovertemplate:'%{y}<br>Five-year real-volume growth: %{x:.1f}%<extra></extra>'
+}], {
+  ...baseLayout,
+  margin:{l:245,r:70,t:10,b:55},
+  xaxis:{...baseLayout.xaxis,title:'June 2021 to June 2026 real-volume growth (%)',zeroline:true,zerolinecolor:'#7f93a8'},
+  yaxis:{...baseLayout.yaxis,automargin:true}
+}, config);
+
+Plotly.newPlot('fiveYearGapLeaders', [{
+  x:FIVE_YEAR_CROSS_SECTION.gapChange.slice().reverse(),
+  y:FIVE_YEAR_CROSS_SECTION.gapLabels.slice().reverse(),
+  type:'bar',
+  orientation:'h',
+  text:FIVE_YEAR_CROSS_SECTION.gapChange.slice().reverse().map(v => '+' + v.toFixed(1) + ' pts'),
+  textposition:'outside',
+  cliponaxis:false,
+  hovertemplate:'%{y}<br>Increase in nominal–real index gap: %{x:.1f} pts<extra></extra>'
+}], {
+  ...baseLayout,
+  margin:{l:245,r:70,t:10,b:55},
+  xaxis:{...baseLayout.xaxis,title:'Change in NETTUR − VOL_SLS gap (index points)',zeroline:true,zerolinecolor:'#7f93a8'},
+  yaxis:{...baseLayout.yaxis,automargin:true}
+}, config);
+
+const rankVals = RANK.yoy.filter(v => v !== null && Number.isFinite(v));
+const rankMin = Math.min(...rankVals);
+const rankMax = Math.max(...rankVals);
+const axisMin = Math.floor(rankMin - 1);
+const axisMax = Math.ceil(rankMax + 1);
+const tickStep = 2;
+const tickVals = [];
+for (let v = Math.ceil(axisMin / tickStep) * tickStep; v <= axisMax; v += tickStep) tickVals.push(v);
+if (!tickVals.includes(0)) tickVals.push(0);
+tickVals.sort((a,b)=>a-b);
+const tickText = tickVals.map(v => (v > 0 ? '+' : '') + v + '%');
+const rankY = RANK.yoy.slice().reverse();
+const rankCountries = RANK.countries.slice().reverse();
+const rankLabels = rankY.map(v => (v === null || !Number.isFinite(v)) ? '—' : (v > 0 ? '+' : '') + v.toFixed(1) + '%');
+const rankHover = rankCountries.map((c,i) => c + ': ' + rankLabels[i]);
+
+Plotly.newPlot('rankingChart', [{
+  x:rankY,
+  y:rankCountries,
+  type:'bar',
+  orientation:'h',
+  text:rankLabels,
+  textposition:'outside',
+  cliponaxis:false,
+  customdata:rankHover,
+  hovertemplate:'%{customdata}<extra></extra>'
+}], {
+  ...baseLayout,
+  margin:{l:125,r:85,t:10,b:60},
+  xaxis:{
+    ...baseLayout.xaxis,
+    title:'YoY real retail volume growth (%)',
+    range:[axisMin, axisMax],
+    tickmode:'array',
+    tickvals:tickVals,
+    ticktext:tickText,
+    zeroline:true,
+    zerolinecolor:'#7f93a8',
+    zerolinewidth:1.5,
+    fixedrange:false
+  },
+  yaxis:{...baseLayout.yaxis,automargin:true}
+}, config);
+</script>
+</body>
+</html>
