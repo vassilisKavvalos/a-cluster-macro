@@ -1,0 +1,40 @@
+{
+  "dataset": "nrg_pc_204",
+  "latest_period": "2025-S2",
+  "previous_period": "2025-S1",
+  "change_reference": "2024-S2",
+  "frequency": "Semi-annual",
+  "reference_band": "DC | 2,500–4,999 kWh/year",
+  "greece": {
+    "eur_all_bands": 0.2554,
+    "pps_all_bands": 0.3143,
+    "pps_band_dc": 0.293,
+    "pps_band_dc_ex_tax": 0.2403,
+    "rank_eur": 16,
+    "rank_pps": 11,
+    "rank_dc_pps": 12,
+    "yoy_pct": 2.6989134244654656,
+    "vs_eu27_dc_pct": 0.8258774948382452,
+    "vs_eu27_all_pps_pct": 5.931917762049199,
+    "tax_effect_dc_pct": 21.930919683728668
+  },
+  "eu27": {
+    "eur_all_bands": 0.2942,
+    "pps_all_bands": 0.2967,
+    "pps_band_dc": 0.2906
+  },
+  "momentum": {
+    "largest_increase_country": "Romania",
+    "largest_increase_pct": 51.483634138880376,
+    "largest_decline_country": "Turkey",
+    "largest_decline_pct": -15.659068384539154
+  },
+  "commentary": {
+    "headline": "The latest Eurostat household electricity-price release is 2025-S2. Greece is broadly aligned with the EU27 benchmark in Band DC in PPS terms.",
+    "affordability": "Greece ranks 16th in nominal EUR terms but 11th in PPS terms, indicating a heavier affordability burden after adjusting for purchasing power.",
+    "typical_household": "Greece is broadly aligned with the EU27 benchmark in Band DC in PPS terms.",
+    "taxes": "For Band DC, the tax-inclusive PPS price in Greece is about 21.9% above the tax-exclusive level.",
+    "trend": "The trend section should be read as a convergence/divergence signal: the important question is whether Greece is moving toward or away from the EU27 benchmark over time.",
+    "momentum": "Greek Band DC electricity prices increased +2.7% year on year. Across the wider sample, Romania recorded the largest increase (+51.5%), while Turkey recorded the largest decline (-15.7%)."
+  }
+}
