@@ -8,6 +8,7 @@
   "modules": {
     "growth_quality": {
       "assessment": "Investment-led growth",
+      "primary_driver": "Investment",
       "gdp_growth_yoy": 2.0,
       "quarter": "2026-Q1"
     },
@@ -19,7 +20,7 @@
     },
     "competitiveness": {
       "assessment": "Mixed / broadly neutral",
-      "productivity_gap_vs_eu_pp": 0.1,
+      "productivity_gap_vs_eu_pp": 0.10000000000000003,
       "nulc_gap_vs_eu_pp": -2.3,
       "comparison_quarter": "2026-Q1",
       "latest_productivity_quarter": "2026-Q2"
