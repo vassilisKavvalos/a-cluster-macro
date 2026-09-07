@@ -3,42 +3,42 @@
   "country_code": "EL",
   "country": "Greece",
   "country_slug": "greece",
-  "publication_quarter": "2026-Q1",
+  "publication_quarter": "2026-Q2",
   "overall_assessment": "Constructive but mixed",
   "modules": {
     "growth_quality": {
-      "assessment": "Investment-led growth",
-      "primary_driver": "Investment",
-      "gdp_growth_yoy": 2.0,
-      "quarter": "2026-Q1"
+      "assessment": "Broad-based growth",
+      "primary_driver": "Household consumption",
+      "gdp_growth_yoy": 1.9,
+      "quarter": "2026-Q2"
     },
     "investment_quality": {
       "assessment": "Productive-capital intensive",
-      "gfcf_pct_gdp": 16.9,
-      "productive_capital_proxy_share": 0.5753469160439968,
-      "quarter": "2026-Q1"
+      "gfcf_pct_gdp": 17.0,
+      "productive_capital_proxy_share": 0.5493156636975884,
+      "quarter": "2026-Q2"
     },
     "competitiveness": {
       "assessment": "Mixed / broadly neutral",
-      "productivity_gap_vs_eu_pp": 0.10000000000000003,
-      "nulc_gap_vs_eu_pp": -2.3,
-      "comparison_quarter": "2026-Q1",
+      "productivity_gap_vs_eu_pp": 1.9000000000000001,
+      "nulc_gap_vs_eu_pp": 0.20000000000000018,
+      "comparison_quarter": "2026-Q2",
       "latest_productivity_quarter": "2026-Q2"
     },
     "household_demand": {
       "assessment": "Durable-led discretionary demand",
-      "real_consumption_growth_yoy": 2.4,
-      "quarter": "2026-Q1"
+      "real_consumption_growth_yoy": 1.0,
+      "quarter": "2026-Q2"
     },
     "external_sector": {
-      "assessment": "Export-supported external contribution",
-      "net_exports_contribution_pp": 0.73,
-      "quarter": "2026-Q1"
+      "assessment": "External drag on growth",
+      "net_exports_contribution_pp": -0.7600000000000001,
+      "quarter": "2026-Q2"
     }
   },
   "public_urls": {
     "latest": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/greece/",
-    "archive": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/greece/archive/2026-Q1.html",
+    "archive": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/greece/archive/2026-Q2.html",
     "landing": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/"
   }
 }
