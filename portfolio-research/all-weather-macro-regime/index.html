@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A-CLUSTER All-Weather Macro Regime Portfolio research page">
+<title>A-CLUSTER | All-Weather Macro Regime Portfolio</title>
+
+<style>
+:root {
+    --navy: #0b1f38;
+    --navy2: #153657;
+    --ink: #17283f;
+    --muted: #6f7f91;
+    --line: #dbe3ea;
+    --panel: #f4f7fa;
+    --accent: #c59b42;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--white);
+    line-height: 1.55;
+}
+
+.wrap {
+    width: min(1180px, 92vw);
+    margin: 0 auto;
+}
+
+.hero {
+    padding: 72px 0 60px;
+    color: white;
+    background: linear-gradient(135deg, var(--navy), var(--navy2));
+    border-bottom: 4px solid var(--accent);
+}
+
+.eyebrow {
+    color: #dbc58f;
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    max-width: 980px;
+    margin: .35rem 0 1rem;
+    font-size: clamp(2.2rem, 5vw, 4.4rem);
+    line-height: 1.03;
+}
+
+.hero p {
+    max-width: 900px;
+    color: #d8e2ed;
+    font-size: 1.08rem;
+}
+
+.meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 22px;
+}
+
+.pill {
+    padding: 7px 11px;
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 999px;
+    background: rgba(255,255,255,.05);
+    font-size: .8rem;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255,255,255,.96);
+    border-bottom: 1px solid var(--line);
+}
+
+nav .wrap {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 13px 0;
+    white-space: nowrap;
+}
+
+nav a {
+    color: #273952;
+    text-decoration: none;
+    font-size: .86rem;
+    font-weight: 700;
+}
+
+section {
+    padding: 58px 0;
+}
+
+.band {
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.kicker {
+    color: var(--accent);
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+h2 {
+    margin: .25rem 0 1rem;
+    font-size: clamp(1.75rem, 3vw, 2.55rem);
+    line-height: 1.12;
+}
+
+h3 {
+    margin: .2rem 0 .6rem;
+}
+
+.lead {
+    max-width: 860px;
+    color: var(--muted);
+}
+
+.grid4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.grid3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.glance {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.glance-item {
+    padding: 14px 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: white;
+    text-align: center;
+}
+
+.glance-item strong {
+    display: block;
+    font-size: 1.15rem;
+    color: var(--navy);
+}
+
+.glance-item span {
+    color: var(--muted);
+    font-size: .76rem;
+}
+
+.pipeline {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.pipeline-step {
+    position: relative;
+    padding: 14px 10px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: white;
+    text-align: center;
+    font-size: .78rem;
+    font-weight: 700;
+    color: #33475f;
+}
+
+.pipeline-step:not(:last-child)::after {
+    content: "→";
+    position: absolute;
+    right: -9px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    font-size: 1rem;
+}
+
+.card,
+.callout {
+    padding: 19px;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: white;
+}
+
+.callout {
+    border-left: 4px solid var(--accent);
+}
+
+.ticker {
+    color: var(--accent);
+    font-size: .78rem;
+    font-weight: 800;
+}
+
+.small,
+.card p {
+    color: var(--muted);
+    font-size: .86rem;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: white;
+}
+
+.research-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .86rem;
+}
+
+.research-table th,
+.research-table td {
+    padding: 11px 13px;
+    border-bottom: 1px solid var(--line);
+    text-align: right;
+}
+
+.research-table th:first-child,
+.research-table td:first-child {
+    text-align: left;
+}
+
+.research-table th {
+    background: #edf2f6;
+    color: #46586d;
+    font-size: .76rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.chart {
+    margin: 18px 0 27px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: white;
+}
+
+.chart img {
+    display: block;
+    width: 100%;
+}
+
+.caption {
+    padding: 13px 16px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: .83rem;
+}
+
+.warning {
+    padding: 15px;
+    border: 1px solid #ead39d;
+    border-radius: 9px;
+    background: #fff7e5;
+    color: #6b5424;
+}
+
+.note {
+    padding: 15px;
+    border: 1px solid #d6e1e9;
+    border-radius: 9px;
+    background: #eef4f8;
+    color: #40536a;
+}
+
+.footer {
+    padding: 34px 0;
+    background: var(--navy);
+    color: #c9d5e2;
+    font-size: .82rem;
+}
+
+.footer strong {
+    color: white;
+}
+
+@media (max-width: 900px) {
+    .grid4 {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .grid3,
+    .grid2 {
+        grid-template-columns: 1fr;
+    }
+
+    .glance {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .pipeline {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pipeline-step:not(:last-child)::after {
+        display: none;
+    }
+}
+
+@media (max-width: 560px) {
+    .grid4 {
+        grid-template-columns: 1fr;
+    }
+
+    .glance {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pipeline {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+<div class="wrap">
+    <div class="eyebrow">
+        A-CLUSTER Quantitative Research Lab
+    </div>
+
+    <h1>
+        All-Weather Macro Regime Portfolio
+    </h1>
+
+    <p>
+        A systematic multi-asset portfolio designed to remain diversified
+        across changing macroeconomic regimes. The framework combines four
+        distinct economic exposures and compares multiple allocation methods
+        under a common, rolling research process.
+    </p>
+
+    <div class="meta">
+        <span class="pill">Research cutoff: 2026-09-10</span>
+        <span class="pill">252-day estimation window</span>
+        <span class="pill">Monthly rebalance</span>
+        <span class="pill">yfinance adjusted Close</span>
+    </div>
+</div>
+</header>
+
+<nav>
+<div class="wrap">
+    <a href="#overview">Overview</a>
+    <a href="#construction">Construction</a>
+    <a href="#thesis">Thesis</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#allocation">Allocation</a>
+    <a href="#historical">Historical</a>
+    <a href="#supplementary">Extended</a>
+    <a href="#scenario">Scenario</a>
+    <a href="#monitoring">Current</a>
+    <a href="#conclusion">Conclusion</a>
+</div>
+</nav>
+
+<main>
+
+<section id="overview">
+<div class="wrap">
+
+    <div class="kicker">What is this portfolio?</div>
+    <h2>A portfolio built for regime uncertainty rather than regime prediction</h2>
+
+    <p class="lead">
+        The A-CLUSTER All-Weather Macro Regime Portfolio is a systematic
+        multi-asset framework designed for an environment in which no single
+        macroeconomic scenario can be assumed to persist. Growth, inflation,
+        monetary tightening, recession and geopolitical stress affect asset
+        classes differently. The portfolio therefore combines exposures with
+        different economic functions rather than concentrating on one forecast.
+    </p>
+
+    <p class="lead">
+        The objective is not to identify the next winning asset. It is to build
+        a portfolio whose components respond differently across regimes and then
+        choose an allocation policy that preserves that diversification with an
+        acceptable level of concentration, turnover and estimation risk.
+    </p>
+
+    <div class="glance">
+        <div class="glance-item"><strong>4</strong><span>economic sleeves</span></div>
+        <div class="glance-item"><strong>3</strong><span>allocation engines</span></div>
+        <div class="glance-item"><strong>Monthly</strong><span>rebalance review</span></div>
+        <div class="glance-item"><strong>252d</strong><span>estimation window</span></div>
+        <div class="glance-item"><strong>Risk Parity</strong><span>current preferred implementation</span></div>
+        <div class="glance-item"><strong>European-listed</strong><span>implementation universe</span></div>
+    </div>
+
+</div>
+</section>
+
+<section id="construction" class="band">
+<div class="wrap">
+
+    <div class="kicker">How the portfolio is constructed</div>
+    <h2>From macroeconomic logic to an investable portfolio</h2>
+
+    <p class="lead">
+        The construction process starts with economic purpose, not with historical
+        return ranking. Each sleeve is selected because it represents a distinct
+        macro function. Statistical tools are then used to test whether those
+        exposures actually behave differently, and allocation engines are compared
+        under identical research conditions.
+    </p>
+
+    <div class="grid3">
+
+        <div class="card">
+            <h3>1. Define the investable universe</h3>
+            <p>Use European exchange-traded instruments suitable for practical implementation, with UCITS funds supplemented where necessary by UCITS-eligible exchange-traded commodity products.</p>
+        </div>
+
+        <div class="card">
+            <h3>2. Map economic functions</h3>
+            <p>Identify exposures intended to behave differently across slowdown, recovery, inflation, falling real rates and geopolitical stress.</p>
+        </div>
+
+        <div class="card">
+            <h3>3. Test diversification</h3>
+            <p>Use correlation analysis and hierarchical clustering to verify that the selected assets are not simply different labels for the same underlying risk driver.</p>
+        </div>
+
+        <div class="card">
+            <h3>4. Compare allocation engines</h3>
+            <p>Apply Equal Weight, Risk Parity and constrained optimization to the same universe, same estimation window and same rebalance dates.</p>
+        </div>
+
+        <div class="card">
+            <h3>5. Evaluate robustness</h3>
+            <p>Compare realized return and drawdown together with modeled risk contributions, concentration, one-way rebalance turnover, effective N and estimation-window sensitivity.</p>
+        </div>
+
+        <div class="card">
+            <h3>6. Select the implementation policy</h3>
+            <p>Prefer the method whose assumptions, diversification properties and governance burden best fit the portfolio objective rather than the method with the highest single historical statistic.</p>
+        </div>
+
+    </div>
+
+    <div class="pipeline">
+        <div class="pipeline-step">Macro regimes</div>
+        <div class="pipeline-step">Economic functions</div>
+        <div class="pipeline-step">Asset selection</div>
+        <div class="pipeline-step">Clustering</div>
+        <div class="pipeline-step">Allocation engines</div>
+        <div class="pipeline-step">Rolling backtest</div>
+        <div class="pipeline-step">Governance checks</div>
+        <div class="pipeline-step">Preferred implementation</div>
+    </div>
+
+</div>
+</section>
+
+<section id="thesis">
+<div class="wrap">
+
+    <div class="kicker">
+        Research thesis
+    </div>
+
+    <h2>
+        Diversify economic functions, then test the implementation
+    </h2>
+
+    <p class="lead">
+        The portfolio architecture comes first. Allocation policies are
+        evaluated through modeled risk, realized outcomes, concentration,
+        turnover and estimation sensitivity. No strategy is selected from
+        a single performance statistic.
+    </p>
+
+    <div class="grid3">
+
+        <div class="callout">
+            <strong>Equal Weight</strong>
+            <div class="small">
+                Transparent neutral capital benchmark.
+            </div>
+        </div>
+
+        <div class="callout">
+            <strong>Risk Parity</strong>
+            <div class="small">
+                Current preferred implementation, conditional on governance
+                and risk-budget stability.
+            </div>
+        </div>
+
+        <div class="callout">
+            <strong>Optimized</strong>
+            <div class="small">
+                Diagnostic comparator; concentration and sensitivity are
+                explicit costs.
+            </div>
+        </div>
+
+    </div>
+</div>
+</section>
+
+<section id="architecture" class="band">
+<div class="wrap">
+
+    <div class="kicker">
+        Portfolio architecture
+    </div>
+
+    <h2>
+        Four economically distinct sleeves
+    </h2>
+
+    <div class="grid4">
+
+        <div class="card">
+            <div class="ticker">XDEB.DE</div>
+            <h3>Minimum Volatility Equity</h3>
+            <p>Defensive global equity function.</p>
+        </div>
+
+        <div class="card">
+            <div class="ticker">IS3S.DE</div>
+            <h3>Global Value Factor</h3>
+            <p>Cyclical / recovery equity function.</p>
+        </div>
+
+        <div class="card">
+            <div class="ticker">PHPM.MI</div>
+            <h3>Physical Precious Metals</h3>
+            <p>
+                Monetary and geopolitical stress diversifier.
+                ETC/ETP, not a UCITS fund.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="ticker">LYTR.DE</div>
+            <h3>Energy & Metals Commodities</h3>
+            <p>Inflation and supply-shock function.</p>
+        </div>
+
+    </div>
+
+    <p class="warning" style="margin-top:18px;">
+        Canonical public analysis begins after the January 2023 LYTR
+        benchmark transition. Longer history should be treated as
+        supplementary rather than homogeneous current-strategy history.
+    </p>
+
+</div>
+</section>
+
+<section id="allocation">
+<div class="wrap">
+
+    <div class="kicker">
+        Current model state
+    </div>
+
+    <h2>
+        Allocation and modeled risk
+    </h2>
+
+    <div class="table-wrap">
+        <table class="dataframe research-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Equal Weight</th>
+      <th>Risk Parity</th>
+      <th>Optimized</th>
+    </tr>
+    <tr>
+      <th>Ticker</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>XDEB.DE</th>
+      <td>25.0%</td>
+      <td>27.2%</td>
+      <td>4.8%</td>
+    </tr>
+    <tr>
+      <th>IS3S.DE</th>
+      <td>25.0%</td>
+      <td>36.4%</td>
+      <td>60.0%</td>
+    </tr>
+    <tr>
+      <th>PHPM.MI</th>
+      <td>25.0%</td>
+      <td>12.6%</td>
+      <td>0.0%</td>
+    </tr>
+    <tr>
+      <th>LYTR.DE</th>
+      <td>25.0%</td>
+      <td>23.7%</td>
+      <td>35.2%</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+    <div class="grid2">
+
+        <div class="chart">
+            <img
+                src="all_weather_figures/01_current_capital_weights.png"
+                alt="Current capital weights"
+            >
+            <div class="caption">
+                Current capital allocations across the three policies.
+            </div>
+        </div>
+
+        <div class="chart">
+            <img
+                src="all_weather_figures/02_risk_parity_capital_vs_modeled_risk.png"
+                alt="Risk contribution comparison"
+            >
+            <div class="caption">
+                Capital weight and modeled risk contribution are different quantities.
+            </div>
+        </div>
+
+    </div>
+
+    <div class="chart">
+        <img
+            src="all_weather_figures/03_correlation_matrix.png"
+            alt="Correlation matrix"
+        >
+        <div class="caption">
+            Observed correlation structure across the four economic functions.
+        </div>
+    </div>
+
+</div>
+</section>
+
+<section id="historical" class="band">
+<div class="wrap">
+
+    <div class="kicker">
+        Rolling historical evidence
+    </div>
+
+    <h2>
+        Performance and governance scorecard
+    </h2>
+
+    <div class="note" style="margin-bottom:18px;">
+        <strong>Canonical current-strategy evidence:</strong>
+        rolling out-of-sample returns from 2024-02-01 to 2026-09-10.
+        The underlying price sample begins after the January 2023 LYTR benchmark transition.
+        The 252-day estimation window delays the first investable out-of-sample observation.
+    </div>
+
+    <div class="table-wrap">
+        <table class="dataframe research-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CAGR</th>
+      <th>Volatility</th>
+      <th>Sharpe</th>
+      <th>Sortino</th>
+      <th>Max Drawdown</th>
+      <th>Average Rebalance Turnover</th>
+      <th>Average Effective N</th>
+      <th>Average Largest Weight</th>
+      <th>Maximum Largest Weight</th>
+      <th>Concentration Flag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Equal Weight</th>
+      <td>22.6%</td>
+      <td>12.7%</td>
+      <td>1.51</td>
+      <td>2.10</td>
+      <td>-12.6%</td>
+      <td>1.4%</td>
+      <td>4.00</td>
+      <td>25.0%</td>
+      <td>25.0%</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <th>Risk Parity</th>
+      <td>24.2%</td>
+      <td>12.3%</td>
+      <td>1.66</td>
+      <td>2.32</td>
+      <td>-12.9%</td>
+      <td>2.4%</td>
+      <td>3.70</td>
+      <td>35.9%</td>
+      <td>42.2%</td>
+      <td>OK</td>
+    </tr>
+    <tr>
+      <th>Optimized</th>
+      <td>28.8%</td>
+      <td>14.7%</td>
+      <td>1.66</td>
+      <td>2.37</td>
+      <td>-13.7%</td>
+      <td>10.4%</td>
+      <td>2.10</td>
+      <td>58.8%</td>
+      <td>60.0%</td>
+      <td>HIGH</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+    <div class="note" style="margin-top:18px;">
+        <strong>Metric definitions:</strong> CAGR is geometric annualized growth.
+        Sharpe uses annualized arithmetic mean excess daily return divided by
+        annualized volatility. Sortino uses the same annualized mean excess return
+        divided by annualized downside deviation relative to the daily equivalent
+        of the configured risk-free rate.
+    </div>
+
+    <div class="note" style="margin-top:18px;">
+        <strong>Turnover definition:</strong> average one-way rebalance turnover is
+        calculated against drifted pre-trade weights at each monthly rebalance.
+        Portfolio weights are allowed to drift naturally between rebalance dates.
+    </div>
+
+    <div class="chart">
+        <img
+            src="all_weather_figures/04_growth_of_100.png"
+            alt="Growth of 100"
+        >
+        <div class="caption">
+            Rolling out-of-sample policy paths.
+            Historical performance is evidence, not a forecast.
+        </div>
+    </div>
+
+    <div class="chart">
+        <img
+            src="all_weather_figures/05_drawdowns.png"
+            alt="Drawdowns"
+        >
+        <div class="caption">
+            Realized drawdown is evaluated separately from covariance-based
+            risk budgets.
+        </div>
+    </div>
+
+    <div class="chart">
+        <img
+            src="all_weather_figures/06_rolling_risk_parity_weights.png"
+            alt="Rolling Risk Parity weights"
+        >
+        <div class="caption">
+            Rolling capital weights document implementation behavior;
+            they do not prove stable realized risk.
+        </div>
+    </div>
+
+    <h3>Primary equity index benchmark</h3>
+
+    <p class="lead">
+        The primary equity-market reference used in this run is
+        <strong>S&P 500 Total Return Index (^SP500TR)</strong>.
+        The preferred specification is the S&amp;P 500 Total Return Index because
+        it includes reinvested distributions and is therefore more comparable
+        with adjusted ETF return series. If the total-return series is unavailable,
+        the page labels the S&amp;P 500 price-index fallback explicitly.
+    </p>
+
+    <div class="table-wrap">
+        <table class="dataframe research-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CAGR</th>
+      <th>Volatility</th>
+      <th>Sharpe</th>
+      <th>Sortino</th>
+      <th>Max Drawdown</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>S&amp;P 500 Total Return Index</th>
+      <td>19.9%</td>
+      <td>15.4%</td>
+      <td>1.12</td>
+      <td>1.65</td>
+      <td>-18.7%</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+    <h3 style="margin-top:28px;">Investable comparators</h3>
+
+    <p class="lead">
+        For implementation-level comparison, Risk Parity is also compared with
+        adjusted-price investable alternatives: SPPW.DE and a monthly rebalanced
+        60/40 SPPW.DE / SXRM.DE portfolio.
+    </p>
+
+    <div class="table-wrap">
+        <table class="dataframe research-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CAGR</th>
+      <th>Volatility</th>
+      <th>Sharpe</th>
+      <th>Sortino</th>
+      <th>Max Drawdown</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Risk Parity</th>
+      <td>24.2%</td>
+      <td>12.3%</td>
+      <td>1.66</td>
+      <td>2.32</td>
+      <td>-12.9%</td>
+    </tr>
+    <tr>
+      <th>Investable Global Equity — SPPW.DE</th>
+      <td>16.3%</td>
+      <td>13.6%</td>
+      <td>1.04</td>
+      <td>1.45</td>
+      <td>-21.6%</td>
+    </tr>
+    <tr>
+      <th>Investable 60/40 — SPPW.DE / SXRM.DE</th>
+      <td>10.5%</td>
+      <td>8.4%</td>
+      <td>0.99</td>
+      <td>1.41</td>
+      <td>-12.7%</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+    <div class="note" style="margin-top:18px;">
+        All metrics use the same canonical calendar start and end dates, but each
+        series retains its own trading calendar. The chart aligns normalized wealth
+        levels with forward-filling between market holidays; strategy returns are
+        never deleted merely because another market was closed.
+    </div>
+
+    <div class="chart">
+        <img
+            src="all_weather_figures/10_canonical_benchmark_comparison.png"
+            alt="Risk Parity, S&P 500 and investable comparators"
+        >
+        <div class="caption">
+            Canonical out-of-sample comparison. The S&amp;P 500 benchmark is the
+            primary equity-market reference; SPPW.DE and the 60/40 portfolio are
+            investable comparators.
+        </div>
+    </div>
+
+</div>
+</section>
+
+<section id="supplementary">
+<div class="wrap">
+
+    <div class="kicker">
+        Supplementary historical context
+    </div>
+
+    <h2>
+        Extended evidence — context, not current-strategy history
+    </h2>
+
+    <p class="lead">
+        The same rolling methodology is applied to the longest common four-instrument
+        yfinance history, producing out-of-sample returns from 2020-03-02
+        to 2026-09-10. These results provide context only because LYTR's
+        benchmark changed in January 2023. Pre-2023 observations are therefore not
+        a homogeneous history of the current benchmark specification.
+    </p>
+
+    <div class="warning" style="margin-bottom:18px;">
+        Do not merge these metrics with the canonical current-strategy evidence and
+        do not use the extended window to claim a longer live-equivalent track record.
+    </div>
+
+    <div class="table-wrap">
+        <table class="dataframe research-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CAGR</th>
+      <th>Volatility</th>
+      <th>Sharpe</th>
+      <th>Sortino</th>
+      <th>Max Drawdown</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Equal Weight</th>
+      <td>13.2%</td>
+      <td>13.5%</td>
+      <td>0.84</td>
+      <td>1.14</td>
+      <td>-21.7%</td>
+    </tr>
+    <tr>
+      <th>Risk Parity</th>
+      <td>13.9%</td>
+      <td>13.1%</td>
+      <td>0.91</td>
+      <td>1.24</td>
+      <td>-21.2%</td>
+    </tr>
+    <tr>
+      <th>Optimized</th>
+      <td>16.8%</td>
+      <td>15.0%</td>
+      <td>0.98</td>
+      <td>1.36</td>
+      <td>-19.8%</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+    <div class="chart">
+        <img
+            src="all_weather_figures/09_supplementary_extended_growth_of_100.png"
+            alt="Supplementary extended growth of 100"
+        >
+        <div class="caption">
+            Supplementary extended rolling evidence. Pre-2023 LYTR history reflects
+            an earlier benchmark specification and is shown only for context.
+        </div>
+    </div>
+
+</div>
+</section>
+
+<section id="scenario">
+<div class="wrap">
+
+    <div class="kicker">
+        Scenario analysis
+    </div>
+
+    <h2>
+        Monte Carlo as a robustness lens
+    </h2>
+
+    <p class="lead">
+        A moving-block bootstrap resamples observed rolling Risk Parity
+        returns. The distribution is conditional on the historical sample
+        and should not be read as a probability forecast.
+    </p>
+
+    <div class="grid2">
+
+        <div class="table-wrap">
+            <table class="dataframe research-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Metric</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Median terminal value</td>
+      <td>125.51</td>
+    </tr>
+    <tr>
+      <td>5th percentile terminal value</td>
+      <td>101.94</td>
+    </tr>
+    <tr>
+      <td>95th percentile terminal value</td>
+      <td>150.31</td>
+    </tr>
+    <tr>
+      <td>5th percentile return</td>
+      <td>+1.94%</td>
+    </tr>
+    <tr>
+      <td>Probability of loss</td>
+      <td>3.5%</td>
+    </tr>
+    <tr>
+      <td>Expected Shortfall — worst 5% mean return</td>
+      <td>-3.83%</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+
+        <div class="note">
+            <strong>Interpretation</strong><br>
+            Lower-tail statistics are expressed as returns to avoid ambiguous sign
+            conventions. Expected Shortfall is the mean return of the worst 5% of
+            simulated terminal outcomes. Regime changes, liquidity shocks and
+            structural breaks can still produce outcomes outside the simulated distribution.
+        </div>
+
+    </div>
+
+    <div class="chart">
+        <img
+            src="all_weather_figures/08_monte_carlo_terminal_distribution.png"
+            alt="Monte Carlo distribution"
+        >
+        <div class="caption">
+            One-year moving-block bootstrap from initial portfolio value 100.
+        </div>
+    </div>
+
+</div>
+</section>
+
+<section id="monitoring" class="band">
+<div class="wrap">
+
+    <div class="kicker">
+        Current monitoring
+    </div>
+
+    <h2>
+        YTD realized strategy performance and current-weight attribution
+    </h2>
+
+    <p class="lead">
+        Two different questions are shown separately. <strong>Realized YTD strategy
+        performance</strong> comes from the rolling monthly out-of-sample Risk Parity
+        return series, using the weights that applied through time. <strong>Current-weight
+        YTD attribution</strong> is a diagnostic that applies today's weights to each
+        asset's YTD return; it is not a realized strategy track record.
+    </p>
+
+    <div class="grid2">
+
+        <div>
+            <h3>Realized YTD strategy vs benchmarks</h3>
+            <div class="table-wrap">
+                <table class="dataframe research-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>YTD Return</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Realized Risk Parity Strategy</th>
+      <td>23.8%</td>
+    </tr>
+    <tr>
+      <th>Dow Jones</th>
+      <td>7.6%</td>
+    </tr>
+    <tr>
+      <th>S&amp;P 500</th>
+      <td>10.7%</td>
+    </tr>
+    <tr>
+      <th>DAX</th>
+      <td>3.3%</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+        </div>
+
+        <div>
+            <h3>Current-weight attribution summary</h3>
+            <div class="table-wrap">
+                <table class="dataframe research-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Diagnostic</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Current-weight YTD attribution — risky sleeve</td>
+      <td>23.9%</td>
+    </tr>
+    <tr>
+      <td>Current-weight YTD attribution — total portfolio (90% risky overlay)</td>
+      <td>21.5%</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="chart">
+        <img
+            src="all_weather_figures/07_current_ytd_monitoring.png"
+            alt="Realized YTD Risk Parity monitoring"
+        >
+        <div class="caption">
+            Benchmark comparison uses the realized rolling Risk Parity YTD return,
+            not a backward application of today's portfolio weights.
+        </div>
+    </div>
+
+    <h3>Current-weight YTD attribution by sleeve</h3>
+
+    <div class="table-wrap">
+        <table class="dataframe research-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Current Risky Weight</th>
+      <th>Current Total Portfolio Weight</th>
+      <th>Asset YTD Return</th>
+      <th>Current-Weight Attribution (Risky Sleeve)</th>
+      <th>Current-Weight Attribution (Total Portfolio)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>XDEB.DE</th>
+      <td>27.2%</td>
+      <td>24.5%</td>
+      <td>6.8%</td>
+      <td>1.9%</td>
+      <td>1.7%</td>
+    </tr>
+    <tr>
+      <th>IS3S.DE</th>
+      <td>36.4%</td>
+      <td>32.8%</td>
+      <td>36.6%</td>
+      <td>13.3%</td>
+      <td>12.0%</td>
+    </tr>
+    <tr>
+      <th>PHPM.MI</th>
+      <td>12.6%</td>
+      <td>11.4%</td>
+      <td>-5.1%</td>
+      <td>-0.6%</td>
+      <td>-0.6%</td>
+    </tr>
+    <tr>
+      <th>LYTR.DE</th>
+      <td>23.7%</td>
+      <td>21.3%</td>
+      <td>39.5%</td>
+      <td>9.4%</td>
+      <td>8.4%</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+
+    <div class="note" style="margin-top:18px;">
+        Current-weight attribution is an explanatory decomposition only. It answers:
+        “What would today's weights imply when applied to YTD asset returns?” It should
+        not be described as realized portfolio performance.
+    </div>
+
+</div>
+</section>
+
+<section id="conclusion">
+<div class="wrap">
+
+    <div class="kicker">
+        Research conclusion
+    </div>
+
+    <h2>
+        Preferred implementation: Risk Parity — conditional, not doctrinal
+    </h2>
+
+    <div class="grid2">
+
+        <div class="callout">
+            <strong>Why Risk Parity is preferred here</strong>
+            <div class="small">
+                It seeks to distribute modeled portfolio risk across the four economic functions while preserving broader participation than the optimized comparator.
+            </div>
+        </div>
+
+        <div class="callout">
+            <strong>Why optimization remains in the research</strong>
+            <div class="small">
+                Diagnostic comparator. Historical efficiency must be weighed against concentration, turnover and estimation sensitivity.
+            </div>
+        </div>
+
+    </div>
+
+    <p class="warning" style="margin-top:18px;">
+        <strong>
+            No automatic winner from return, Sharpe or a composite score.
+        </strong>
+        A change in covariance structure, concentration, turnover,
+        sensitivity, instrument design or portfolio purpose can change
+        the preferred implementation.
+    </p>
+
+</div>
+</section>
+
+<section class="band">
+<div class="wrap">
+
+    <div class="kicker">
+        Disclosures
+    </div>
+
+    <h2>
+        Limits of the evidence
+    </h2>
+
+    <p class="small">
+        This material is quantitative research and educational analysis,
+        not individualized investment advice. Historical returns, risk
+        contributions, correlation estimates and simulated distributions
+        are sample-dependent. Transaction costs, taxes, liquidity,
+        currency exposure, tracking difference and implementation
+        constraints can materially alter realized outcomes.
+    </p>
+
+</div>
+</section>
+
+</main>
+
+<footer class="footer">
+<div class="wrap">
+    <strong>A-CLUSTER Quantitative Research Lab</strong><br>
+    All-Weather Macro Regime Portfolio · Research cutoff 2026-09-10
+</div>
+</footer>
+
+</body>
+</html>
