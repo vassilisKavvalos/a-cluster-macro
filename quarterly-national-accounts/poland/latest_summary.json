@@ -1,0 +1,44 @@
+{
+  "project": "A-CLUSTER Quarterly National Accounts",
+  "country_code": "PL",
+  "country": "Poland",
+  "country_slug": "poland",
+  "publication_quarter": "2026-Q2",
+  "overall_assessment": "Constructive but mixed",
+  "modules": {
+    "growth_quality": {
+      "assessment": "Broad-based growth",
+      "primary_driver": "Household consumption",
+      "gdp_growth_yoy": 3.8,
+      "quarter": "2026-Q2"
+    },
+    "investment_quality": {
+      "assessment": "Productive-capital intensive",
+      "gfcf_pct_gdp": 17.7,
+      "productive_capital_proxy_share": 0.4819307997995548,
+      "quarter": "2026-Q2"
+    },
+    "competitiveness": {
+      "assessment": "Productivity gains with labour-cost pressure",
+      "productivity_gap_vs_eu_pp": 1.9000000000000001,
+      "nulc_gap_vs_eu_pp": 1.2000000000000002,
+      "comparison_quarter": "2026-Q2",
+      "latest_productivity_quarter": "2026-Q2"
+    },
+    "household_demand": {
+      "assessment": "Defensive / non-durable-led mix",
+      "real_consumption_growth_yoy": 2.2,
+      "quarter": "2026-Q2"
+    },
+    "external_sector": {
+      "assessment": "Export-supported external contribution",
+      "net_exports_contribution_pp": 0.3700000000000001,
+      "quarter": "2026-Q2"
+    }
+  },
+  "public_urls": {
+    "latest": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/poland/",
+    "archive": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/poland/archive/2026-Q2.html",
+    "landing": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/"
+  }
+}
