@@ -1,0 +1,44 @@
+{
+  "project": "A-CLUSTER Quarterly National Accounts",
+  "country_code": "IT",
+  "country": "Italy",
+  "country_slug": "italy",
+  "publication_quarter": "2026-Q2",
+  "overall_assessment": "Constructive but mixed",
+  "modules": {
+    "growth_quality": {
+      "assessment": "Consumption-led growth",
+      "primary_driver": "Household consumption",
+      "gdp_growth_yoy": 1.0,
+      "quarter": "2026-Q2"
+    },
+    "investment_quality": {
+      "assessment": "Productive-capital intensive",
+      "gfcf_pct_gdp": 22.4,
+      "productive_capital_proxy_share": 0.4677673211979116,
+      "quarter": "2026-Q2"
+    },
+    "competitiveness": {
+      "assessment": "Mixed / broadly neutral",
+      "productivity_gap_vs_eu_pp": -1.1,
+      "nulc_gap_vs_eu_pp": -0.09999999999999964,
+      "comparison_quarter": "2026-Q2",
+      "latest_productivity_quarter": "2026-Q2"
+    },
+    "household_demand": {
+      "assessment": "Durable-led discretionary demand",
+      "real_consumption_growth_yoy": 1.2,
+      "quarter": "2026-Q2"
+    },
+    "external_sector": {
+      "assessment": "Broadly neutral external contribution",
+      "net_exports_contribution_pp": -0.18000000000000016,
+      "quarter": "2026-Q2"
+    }
+  },
+  "public_urls": {
+    "latest": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/italy/",
+    "archive": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/italy/archive/2026-Q2.html",
+    "landing": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/"
+  }
+}
