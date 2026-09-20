@@ -1,0 +1,44 @@
+{
+  "project": "A-CLUSTER Quarterly National Accounts",
+  "country_code": "LT",
+  "country": "Lithuania",
+  "country_slug": "lithuania",
+  "publication_quarter": "2026-Q2",
+  "overall_assessment": "Cautious / mixed with structural pressure",
+  "modules": {
+    "growth_quality": {
+      "assessment": "Consumption-led growth",
+      "primary_driver": "Household consumption",
+      "gdp_growth_yoy": 3.8,
+      "quarter": "2026-Q2"
+    },
+    "investment_quality": {
+      "assessment": "Construction-heavy",
+      "gfcf_pct_gdp": 22.4,
+      "productive_capital_proxy_share": 0.4260862766560466,
+      "quarter": "2026-Q2"
+    },
+    "competitiveness": {
+      "assessment": "Productivity gains with labour-cost pressure",
+      "productivity_gap_vs_eu_pp": 1.9000000000000001,
+      "nulc_gap_vs_eu_pp": 3.0,
+      "comparison_quarter": "2026-Q2",
+      "latest_productivity_quarter": "2026-Q2"
+    },
+    "household_demand": {
+      "assessment": "Broad-based household demand",
+      "real_consumption_growth_yoy": 4.5,
+      "quarter": "2026-Q2"
+    },
+    "external_sector": {
+      "assessment": "External drag on growth",
+      "net_exports_contribution_pp": -1.96,
+      "quarter": "2026-Q2"
+    }
+  },
+  "public_urls": {
+    "latest": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/lithuania/",
+    "archive": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/lithuania/archive/2026-Q2.html",
+    "landing": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/"
+  }
+}
