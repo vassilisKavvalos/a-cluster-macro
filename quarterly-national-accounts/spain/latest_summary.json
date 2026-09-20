@@ -1,0 +1,44 @@
+{
+  "project": "A-CLUSTER Quarterly National Accounts",
+  "country_code": "ES",
+  "country": "Spain",
+  "country_slug": "spain",
+  "publication_quarter": "2026-Q2",
+  "overall_assessment": "Mixed structural picture",
+  "modules": {
+    "growth_quality": {
+      "assessment": "Broad-based growth",
+      "primary_driver": "Household consumption",
+      "gdp_growth_yoy": 2.7,
+      "quarter": "2026-Q2"
+    },
+    "investment_quality": {
+      "assessment": "Productive-capital intensive",
+      "gfcf_pct_gdp": 20.7,
+      "productive_capital_proxy_share": 0.4695358151139124,
+      "quarter": "2026-Q2"
+    },
+    "competitiveness": {
+      "assessment": "Broad competitiveness deterioration",
+      "productivity_gap_vs_eu_pp": -0.9,
+      "nulc_gap_vs_eu_pp": 0.7000000000000002,
+      "comparison_quarter": "2026-Q2",
+      "latest_productivity_quarter": "2026-Q2"
+    },
+    "household_demand": {
+      "assessment": "Durable-led discretionary demand",
+      "real_consumption_growth_yoy": 3.3,
+      "quarter": "2026-Q2"
+    },
+    "external_sector": {
+      "assessment": "External drag on growth",
+      "net_exports_contribution_pp": -0.6,
+      "quarter": "2026-Q2"
+    }
+  },
+  "public_urls": {
+    "latest": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/spain/",
+    "archive": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/spain/archive/2026-Q2.html",
+    "landing": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/"
+  }
+}
