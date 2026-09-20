@@ -1,0 +1,44 @@
+{
+  "project": "A-CLUSTER Quarterly National Accounts",
+  "country_code": "LV",
+  "country": "Latvia",
+  "country_slug": "latvia",
+  "publication_quarter": "2026-Q2",
+  "overall_assessment": "Constructive but mixed",
+  "modules": {
+    "growth_quality": {
+      "assessment": "Consumption-led growth",
+      "primary_driver": "Household consumption",
+      "gdp_growth_yoy": 3.0,
+      "quarter": "2026-Q2"
+    },
+    "investment_quality": {
+      "assessment": "Productive-capital intensive",
+      "gfcf_pct_gdp": 23.9,
+      "productive_capital_proxy_share": 0.4972491197183098,
+      "quarter": "2026-Q2"
+    },
+    "competitiveness": {
+      "assessment": "Broad competitiveness improvement",
+      "productivity_gap_vs_eu_pp": 2.5999999999999996,
+      "nulc_gap_vs_eu_pp": -0.6999999999999997,
+      "comparison_quarter": "2026-Q2",
+      "latest_productivity_quarter": "2026-Q2"
+    },
+    "household_demand": {
+      "assessment": "Mixed household demand",
+      "real_consumption_growth_yoy": 2.1,
+      "quarter": "2026-Q2"
+    },
+    "external_sector": {
+      "assessment": "Broadly neutral external contribution",
+      "net_exports_contribution_pp": 0.040000000000000036,
+      "quarter": "2026-Q2"
+    }
+  },
+  "public_urls": {
+    "latest": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/latvia/",
+    "archive": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/latvia/archive/2026-Q2.html",
+    "landing": "https://vassiliskavvalos.github.io/a-cluster-macro/quarterly-national-accounts/"
+  }
+}
