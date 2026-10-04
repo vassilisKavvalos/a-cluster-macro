@@ -30,9 +30,22 @@
       "real_consumption_growth_yoy": 1.0,
       "quarter": "2026-Q2"
     },
+    "household_income_saving": {
+      "assessment": "Household income and saving pressure",
+      "saving_rate": -5.12,
+      "saving_rate_change_4q_pp": -0.9800000000000004,
+      "real_disposable_income_qoq": -3.65,
+      "quarter": "2026-Q1"
+    },
+    "corporate_income_investment": {
+      "assessment": "Profit-supported investment expansion",
+      "investment_rate": 23.98,
+      "profit_share": 39.83,
+      "quarter": "2026-Q1"
+    },
     "external_sector": {
       "assessment": "External drag on growth",
-      "net_exports_contribution_pp": -0.7600000000000001,
+      "net_exports_contribution_pp": -0.7800000000000001,
       "quarter": "2026-Q2"
     }
   },
